@@ -187,7 +187,7 @@
 
     $(function(){
         var sn = $("#project option:selected").val();
-        $.get("/admin/category01?sn="+sn,function(data){
+        $.get("/app/category01?sn="+sn,function(data){
             $( "#category1" ).html( data );
             //alert( "Load was performed." );
         });
@@ -201,7 +201,7 @@
             var sn = $("#project option:selected").val();
             $( "#category2" ).html('<option value="0">카테고리</option>');
             $( "#category1" ).html('<option value="0">카테고리</option>');
-            $.get("/admin/category01?sn="+sn,function(data){
+            $.get("/app/category01?sn="+sn,function(data){
                 $( "#category1" ).html( data );
                 //alert( "Load was performed." );
             });
@@ -209,7 +209,7 @@
         $("#category1").on("change",function(){
 
             var sn = $("#category1 option:selected").val();
-            $.get("/admin/category02?sn="+sn,function(data){
+            $.get("/app/category02?sn="+sn,function(data){
                 $( "#category2" ).html( data );
                 //alert( "Load was performed." );
             });

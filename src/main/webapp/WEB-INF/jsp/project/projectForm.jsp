@@ -217,7 +217,7 @@
         }
         $.ajax({
             type: "POST",
-            url: "/admin/selPrjTitCt",
+            url: "/app/selPrjTitCt",
             data: "title=" + title,
             success: function (jdata) {
                 if(jdata<1){
@@ -241,7 +241,7 @@
         }
         $.ajax({
             type: "POST",
-            url: "/admin/selPrjCd",
+            url: "/app/selPrjCd",
             data: "title=" + projectcd,
             success: function (jdata) {
                 if(jdata<1){

@@ -266,7 +266,7 @@
             }
             $.ajax({
                 type: "POST",
-                url: "/admin/selPrjTitCt",
+                url: "/app/selPrjTitCt",
                 data: "title=" + title,
                 success: function (jdata) {
                     if(jdata<1){
@@ -294,7 +294,7 @@
             }
             $.ajax({
                 type: "POST",
-                url: "/admin/selPrjCd",
+                url: "/app/selPrjCd",
                 data: "title=" + projectcd,
                 success: function (jdata) {
                     if(jdata<1){
@@ -322,10 +322,10 @@
             }
              $.ajax({
                 type: "POST",
-                url: "/admin/saveMemo",
+                url: "/app/saveMemo",
                 data: $frm.serialize(),
                 success: function (data) {
-                    location.href = "/admin/projectDetail?sn=${projectInfo.sn}";
+                    location.href = "/app/projectDetail?sn=${projectInfo.sn}";
                 },
                 error: function (data) {
                     alert("오류 관리자에게 문의해주세요");
@@ -345,10 +345,10 @@
             }
             $.ajax({
                 type: "POST",
-                url: "/admin/updateMemo",
+                url: "/app/updateMemo",
                 data: $frm.serialize(),
                 success: function (data) {
-                    location.href = "/admin/projectDetail?sn=${projectInfo.sn}";
+                    location.href = "/app/projectDetail?sn=${projectInfo.sn}";
                 },
                 error: function (data) {
                     alert("오류 관리자에게 문의해주세요");
@@ -382,10 +382,10 @@
 
             $.ajax({
                 type: "POST",
-                url: "/admin/delMemo",
+                url: "/app/delMemo",
                 data: {"sn":sn},
                 success: function (data) {
-                    location.href = "/admin/projectDetail?sn=${projectInfo.sn}";
+                    location.href = "/app/projectDetail?sn=${projectInfo.sn}";
                 },
                 error: function (data) {
                     alert("오류 관리자에게 문의해주세요");
@@ -398,11 +398,11 @@
     function mDel(userid){
         $.ajax({
             type: "POST",
-            url: "/admin/delMember",
+            url: "/app/delMember",
             data: {"userid":userid,"sn":${projectInfo.sn}},
             success: function (data) {
                 alert("정상 처리되었습니다.");
-                location.href = "/admin/projectDetail?sn=${projectInfo.sn}";
+                location.href = "/app/projectDetail?sn=${projectInfo.sn}";
             },
             error: function (data) {
                 alert("오류 관리자에게 문의해주세요");
@@ -410,7 +410,7 @@
         });
     }
     function memberList(sn){
-        $.get("/admin/categoryMember?sn=${projectInfo.sn}",function(data){
+        $.get("/app/categoryMember?sn=${projectInfo.sn}",function(data){
             $( "#memberList" ).html( data );
             //alert( "Load was performed." );
         });
@@ -421,9 +421,9 @@
         var arr = new Array();
         arr.push(id);
 
-        $.get("/admin/cmInsert?RPRT_ODR="+arr+"&CNT=1&sn=${projectInfo.sn}",function(data){
+        $.get("/app/cmInsert?RPRT_ODR="+arr+"&CNT=1&sn=${projectInfo.sn}",function(data){
             alert("정상 처리되었습니다.");
-            location.href = "/admin/projectDetail?sn=${projectInfo.sn}";
+            location.href = "/app/projectDetail?sn=${projectInfo.sn}";
         });
     }
     function ckTitle(){
@@ -460,7 +460,7 @@
         else {
             $.ajax({
                 type: "POST",
-                url: "/admin/cmInsert",
+                url: "/app/cmInsert",
                 data: "RPRT_ODR=" + arr + "&CNT=" + cnt+"&sn=${projectInfo.sn}",
                 success: function (jdata) {
 
@@ -468,12 +468,12 @@
                         alert(" 오류");
                     } else {
                         alert("정상 처리되었습니다.");
-                        location.href = "/admin/projectDetail?sn=${projectInfo.sn}";
+                        location.href = "/app/projectDetail?sn=${projectInfo.sn}";
                     }
                 },
                 error: function (data) {
                    // alert(삭제완료);
-                    //location.href = "/admin/project";
+                    //location.href = "/app/project";
                 }
             });
         }

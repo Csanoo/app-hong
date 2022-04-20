@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="satelite.kr">
+<mapper namespace="hgm.kr">
 
-<select id="selectMainStat" parameterType="String" resultType="main.java.admin.satelite.kr.Member1VO">
+<select id="selectMainStat" parameterType="String" resultType="main.java.app.hgm.kr.Member1VO">
 select contcnt,concat(round(timecnt/60),'분')timecnt,concat(round(todaycnt/60),'분')todaycnt,usercnt from vwstat1
 </select>
 
 
 
 <select id="selectMainStat2"
-parameterType="String" resultType="main.java.admin.satelite.kr.Member1VO">
+parameterType="String" resultType="main.java.app.hgm.kr.Member1VO">
 select 
 ifnull((select count(*) from tcontents where userid=#{userid}),0) contcnt,
 ifnull((select sum(looktime) from tcontrack where contsn in (select sn from tcontents where userid=#{userid}) ),0) timecnt,
@@ -21,8 +21,8 @@ from dual
 </select>
 
 	<select id="selectMember1One"
-		parameterType="main.java.admin.satelite.kr.Member1VO"
-		resultType="main.java.admin.satelite.kr.Member1VO">
+		parameterType="main.java.app.hgm.kr.Member1VO"
+		resultType="main.java.app.hgm.kr.Member1VO">
 		SELECT userid,userpw,username,usertype,mobile,email,wdate,imgfile, menu01, menu02, menu03, menu04
 		from tuser
 		where userid=#{userid} and userpw=#{userpw} and state = 'Y'
@@ -30,14 +30,14 @@ from dual
 	
 	<select id="selectMember1Read"
 		parameterType="String"
-		resultType="main.java.admin.satelite.kr.Member1VO">
+		resultType="main.java.app.hgm.kr.Member1VO">
 		SELECT userid,userpw,username,usertype,mobile,email,wdate,imgfile,state, menu01, menu02, menu03, menu04
 		from tuser
 		where userid=#{userid} 
 	</select>
 
 	<insert id="insertMember1One"
-		parameterType="main.java.admin.satelite.kr.Member1VO">
+		parameterType="main.java.app.hgm.kr.Member1VO">
 		insert into tuser (
 		userid,userpw,username,usertype,mobile,email,wdate,state,menu01, menu02, menu03, menu04 )
 		values ( #{userid}
@@ -45,7 +45,7 @@ from dual
 	</insert>
 	
 	<update id="updateMember1One"
-		parameterType="main.java.admin.satelite.kr.Member1VO">
+		parameterType="main.java.app.hgm.kr.Member1VO">
 		update tuser set
 		<if test='userpw != null and userpw != "" '>
 			userpw=#{userpw},
@@ -56,7 +56,7 @@ from dual
 	</update>
 	
 	<update id="updateMember11One"
-		parameterType="main.java.admin.satelite.kr.Member1VO">
+		parameterType="main.java.app.hgm.kr.Member1VO">
 		update tuser set
 		userpw=#{userpw},username=#{username},usertype=#{usertype},mobile=#{mobile},email=#{email}, uptDate=now(), uptuser = #{uptuser}
 		
@@ -88,7 +88,7 @@ from dual
 	</select>
 
 	<select id="selectMember1List"
-		resultType="main.java.admin.satelite.kr.Member1VO"
+		resultType="main.java.app.hgm.kr.Member1VO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT tuser.userid,userpw,username, state,
 		(select title from tcode where code2 = tuser.usertype and code1 = 'USER') as 'usertype'
@@ -115,7 +115,7 @@ from tuser
 	</select>
 
 	<select id="selectMember12List"
-		resultType="main.java.admin.satelite.kr.Member1VO"
+		resultType="main.java.app.hgm.kr.Member1VO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT tuser.userid,userpw,username,usertype,mobile,email,wdate,ifnull(ccnt,0) ccnt from tuser
 		left outer join 
@@ -149,7 +149,7 @@ from tuser
 	</sql>
 
 	<select id="selectMember1Excel"
-		resultType="main.java.admin.satelite.kr.Member1VO"
+		resultType="main.java.app.hgm.kr.Member1VO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT
 		userid,userpw,username,usertype,mobile,email,wdate from tuser
@@ -159,14 +159,14 @@ from tuser
 		1000
 	</select>
 
-	<select id="selectCode1One"	parameterType="String"	resultType="main.java.admin.satelite.kr.Member1VO">
+	<select id="selectCode1One"	parameterType="String"	resultType="main.java.app.hgm.kr.Member1VO">
 		SELECT sn,code1,code2,title,memo,code1memo
 		from tcode
 		where sn=#{sn}
 	</select>
 
 	<insert id="insertCode1One"
-		parameterType="main.java.admin.satelite.kr.Member1VO">
+		parameterType="main.java.app.hgm.kr.Member1VO">
 		insert into tcode (
 		code1,code2,title,memo,code1memo )
 		values (
@@ -174,7 +174,7 @@ from tuser
 	</insert>
 	
 	<update id="updateCode1One"
-		parameterType="main.java.admin.satelite.kr.Member1VO">
+		parameterType="main.java.app.hgm.kr.Member1VO">
 		update tcode set code1=#{code1} , code2=#{code2} ,title=#{title},memo=#{memo}
 		where sn = #{sn}
 		
@@ -215,7 +215,7 @@ from tuser
 
 	</sql>
 
-	<select id="selectCode1List"	resultType="main.java.admin.satelite.kr.Member1VO"	parameterType="main.java.common.satelite.kr.SearchVO">
+	<select id="selectCode1List" resultType="main.java.app.hgm.kr.Member1VO" parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn,code1,code2,title,memo,state,regdate,regid, code1memo from tcode
 		<include refid="includeCode1" />
 
@@ -260,35 +260,35 @@ from tuser
 	</select>
 
 
-	<select id="selectMemberCode"	resultType="main.java.admin.satelite.kr.Member1VO"	parameterType="main.java.common.satelite.kr.SearchVO">
+	<select id="selectMemberCode" resultType="main.java.app.hgm.kr.Member1VO" parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn,code1,code2,title,memo,state,regdate ,regid from tcode
 		<include refid="includeCodeM" />
 
 		LIMIT ${rowStart-1}, 10
 	</select>
 
-	<insert id="insertUserType"	parameterType="main.java.admin.satelite.kr.Member1VO">
+	<insert id="insertUserType"	parameterType="main.java.app.hgm.kr.Member1VO">
 		insert into tcode (	code1,code2,title,memo,code1memo,regid )
 		values (
 		#{code1},#{code2},#{title},#{memo},#{code1memo},#{userid})
 	</insert>
 	
-	<select id="selectCode1SelList"	resultType="main.java.admin.satelite.kr.Member1VO">
+	<select id="selectCode1SelList"	resultType="main.java.app.hgm.kr.Member1VO">
 		SELECT distinct code1,code1memo from tcode where code1 != 'USER'
 		
 	</select>
 
-	<select id="selectCode2SelList"	resultType="main.java.admin.satelite.kr.Member1VO">
+	<select id="selectCode2SelList"	resultType="main.java.app.hgm.kr.Member1VO">
 		SELECT distinct code2,title from tcode where code1='USER'
 
 	</select>
 
-	<select id="selectCodetype"	resultType="main.java.admin.satelite.kr.Member1VO">
+	<select id="selectCodetype"	resultType="main.java.app.hgm.kr.Member1VO">
 		SELECT  code2,title from tcode where code1='TYPE'
 	</select>
 
 	<select id="selectCode1Excel"
-		resultType="main.java.admin.satelite.kr.Member1VO"
+		resultType="main.java.app.hgm.kr.Member1VO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT
 		sn,code1,code2,title,memo from tcode
@@ -300,8 +300,8 @@ from tuser
 
 
 	<select id="selectContents1One"
-		parameterType="main.java.admin.satelite.kr.Member1VO"
-		resultType="main.java.admin.satelite.kr.Member1VO">
+		parameterType="main.java.app.hgm.kr.Member1VO"
+		resultType="main.java.app.hgm.kr.Member1VO">
 		SELECT sn,url,code2,title,memo,userid,category,imgfile 
 		from tcontents
 		where
@@ -311,7 +311,7 @@ from tuser
 	
 	
 	<update id="updateContents"
-		parameterType="main.java.admin.satelite.kr.BannerVO">
+		parameterType="main.java.app.hgm.kr.BannerVO">
 		update tcontents set 
 		url=#{url} ,code2=#{code2},title=#{title},memo=#{memo},userid=#{userid}
 		,category=#{category}
@@ -321,7 +321,7 @@ from tuser
 	</update>
 	
 	<update id="updateContents2"
-		parameterType="main.java.admin.satelite.kr.BannerVO">
+		parameterType="main.java.app.hgm.kr.BannerVO">
 		update tcontents set 
 		url=#{url} ,code2=#{code2},title=#{title},memo=#{memo},userid=#{userid}
 		,category=#{category},fucheck=#{fucheck}
@@ -330,14 +330,14 @@ from tuser
 	</update>
 	
 	<insert id="insertContents"
-		parameterType="main.java.admin.satelite.kr.BannerVO">
+		parameterType="main.java.app.hgm.kr.BannerVO">
 		insert into tcontents (
 		url,code2,title,memo,userid,category,imgfile )
 		values ( #{url},#{code2},#{title},#{memo},#{userid},#{category},#{imgfile} )
 	</insert>
 	
 	<insert id="insertContents1One"
-		parameterType="main.java.admin.satelite.kr.Member1VO">
+		parameterType="main.java.app.hgm.kr.Member1VO">
 		insert into tcontents (
 		url,code2,title,memo,userid,category,imgfile )
 		values ( #{url},#{code2},#{title},#{memo},#{userid},#{category},#{imgfile} )
@@ -402,7 +402,7 @@ from tuser
 
 
 	<select id="selectcontentsList0"
-			resultType="main.java.admin.satelite.kr.ContentsVO"
+			resultType="main.java.app.hgm.kr.ContentsVO"
 			parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn, category, (select title from tcode where code1='TYPE' and code2=tbl_contents.type) as 'type', imageUrl, videoUrl, (select title from tcode where code1='CONT' and code2=tbl_contents.ctSource) as 'ctSource', title, regDate, keyword, userid from tbl_contents
 		<include refid="includecontents0" />
@@ -411,7 +411,7 @@ from tuser
 	</select>
 
 
-	<select id="selectexcelList2" resultType="main.java.admin.satelite.kr.Member1VO"
+	<select id="selectexcelList2" resultType="main.java.app.hgm.kr.Member1VO"
 			parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT  (select title from tcode where code1='TYPE' and code2=tbl_contents.type) as 'type', imageUrl, videoUrl, (select title from tcode where code1='CONT' and code2=tbl_contents.ctSource) as 'ctSource', title, regDate as 'crtdate', keyword, userid from tbl_contents
 		<include refid="includecontents0" />
@@ -432,7 +432,7 @@ from tuser
 	</select>
 
 	<select id="selectContents1List"
-		resultType="main.java.admin.satelite.kr.Member1VO"
+		resultType="main.java.app.hgm.kr.Member1VO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn,tcontents.url,code2,title,'' memo,fucheck, regdate,
 		
@@ -499,7 +499,7 @@ from tpevent group by url
 	</select>
 
 	<select id="selectContents12List"
-		resultType="main.java.admin.satelite.kr.Member1VO"
+		resultType="main.java.app.hgm.kr.Member1VO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn,url,code2,title,memo,userid, regdate,
 		
@@ -519,7 +519,7 @@ else '-' end as category,imgfile,
 	</select>
 
 	<select id="selectContents1Excel"
-		resultType="main.java.admin.satelite.kr.Member1VO"
+		resultType="main.java.app.hgm.kr.Member1VO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT
 		sn,url,code2,title,memo,userid,category,imgfile from tcontents
@@ -533,14 +533,14 @@ else '-' end as category,imgfile,
 		SELECT COUNT(*) FROM tuser where userid = #{userid}
 	</select>
 
-	<select id="project_member"	resultType="main.java.admin.satelite.kr.ProjectVO"	parameterType="main.java.common.satelite.kr.SearchVO">
+	<select id="project_member" resultType="main.java.app.hgm.kr.ProjectVO" parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT A.sn, title, projectcd, comment, state, logoimg, basicTitle, regUser, mngUser,  ct, A.regDate from (
 		SELECT sn, title, projectcd, comment, state, logoimg, basicTitle, regUser, mngUser, regDate, (select count(*)
 		from tbl_contents where project = tbl_project.sn) as 'ct' from tbl_project
 		) A inner join tbl_member_project B on A.sn = B.projectSn where userid = #{userid}
 	</select>
 
-	<select id="selectLogin" parameterType="String"	resultType="main.java.admin.satelite.kr.Member1VO">
+	<select id="selectLogin" parameterType="String"	resultType="main.java.app.hgm.kr.Member1VO">
 		SELECT wdate
 		from edumgtfunclist
 		where userid=#{userid}

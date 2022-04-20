@@ -82,14 +82,14 @@
             page = 1;
         }
         var ppage = page;
-        $.get("/admin/msgList?sn="+sn+"&page="+page , function(data){
+        $.get("/app/msgList?sn="+sn+"&page="+page , function(data){
             $( "#msgList" ).html( data );
         });
     }
     function deletemsg(sn,psn,page) {
         $.ajax({
             type: "POST",
-            url: "/admin/msgDelete",
+            url: "/app/msgDelete",
             data: "sn=" + sn,
             success: function(jdata){
 
@@ -102,7 +102,7 @@
 
                 }
             },
-            error: function(data){location.href = "/admin/project";}
+            error: function(data){location.href = "/app/project";}
         });
 
     }

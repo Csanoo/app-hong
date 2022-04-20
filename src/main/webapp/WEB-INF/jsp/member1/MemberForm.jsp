@@ -198,11 +198,11 @@
                         function mDel(sn){
                             $.ajax({
                                 type: "POST",
-                                url: "/admin/delMember",
+                                url: "/app/delMember",
                                 data: {"userid":'${mvo.userid}',"sn":sn},
                                 success: function (data) {
                                     alert("정상 처리되었습니다.");
-                                    location.href = "/admin/member1Read?userid=${mvo.userid}";
+                                    location.href = "/app/member1Read?userid=${mvo.userid}";
                                 },
                                 error: function (data) {
                                     alert("오류 관리자에게 문의해주세요");

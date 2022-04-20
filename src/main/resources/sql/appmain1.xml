@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="satelite.kr">
+<mapper namespace="hgm.kr">
 
 	<delete id="appmain1Delete" parameterType="String">
 		delete from tbanner2 where sn=#{sn}
 	</delete>
 
-	<select id="selectAppMain1One" parameterType="String" resultType="main.java.admin.satelite.kr.AppMain1VO">
+	<select id="selectAppMain1One" parameterType="String" resultType="main.java.app.hgm.kr.AppMain1VO">
 		SELECT sn,code2,imgfile,link,title,umemo,type1,text1,text2,appkind,creatorimg, sdate, stime, edate, etime, sWidth, sHeight, state, positionX, positionY, closeType, displaytype, dtimetype, project, linkState, linkTarget  from tbanner2 where sn=#{sn}
 	</select>
 
-	<insert id="insertAppMain1One"	parameterType="main.java.admin.satelite.kr.AppMain1VO">
+	<insert id="insertAppMain1One"	parameterType="main.java.app.hgm.kr.AppMain1VO">
 		insert into tbanner2 (code2, imgfile,	link, title, umemo,	type1, text1, text2, appkind, creatorimg
 		<if	test='sdate!="" and edate !="" and displaytype !="Y"'>
 			,sdate,edate
@@ -31,16 +31,16 @@
 		,#{sWidth}, #{sHeight}, #{state}, #{positionX}, #{positionY}, #{closeType} ,#{project},#{linkState}, #{linkTarget}, #{displaytype} ,#{dtimetype})
 	</insert>
 	
-	<insert id="insertAppMain2One" parameterType="main.java.admin.satelite.kr.AppMain1VO">
+	<insert id="insertAppMain2One" parameterType="main.java.app.hgm.kr.AppMain1VO">
 		insert into tbanner2 (
 		code2,imgfile,link,title,umemo,type1,text1,text2,appkind,creatorimg )
 		values ( '2', concat('https://i.ytimg.com/vi/',#{link},'/default.jpg'), #{link},#{title},#{umemo},#{type1},#{text1},#{text2},'2',#{creatorimg} )
 	</insert>
 	<select id="selectBoxproject3"
-			resultType="main.java.admin.satelite.kr.ProjectVO"	parameterType="main.java.common.satelite.kr.SearchVO">
+            resultType="main.java.app.hgm.kr.ProjectVO" parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn, title  from tbl_project order by sn asc
 	</select>
-	<update id="updateAppMain1One"	parameterType="main.java.admin.satelite.kr.AppMain1VO">
+	<update id="updateAppMain1One"	parameterType="main.java.app.hgm.kr.AppMain1VO">
 		update tbanner2 set
 		link=#{link}
 		,title=#{title}
@@ -66,7 +66,7 @@
 	</update>
 	
 	<update id="updateAppMain11One"
-		parameterType="main.java.admin.satelite.kr.AppMain1VO">
+		parameterType="main.java.app.hgm.kr.AppMain1VO">
 		update tbanner2 set
 		link=#{link},title=#{title},umemo=#{umemo}
 		,text1=#{text1},text2=#{text2}
@@ -75,7 +75,7 @@
 	</update>
 	
 	<update id="updateAppMain2One"
-		parameterType="main.java.admin.satelite.kr.AppMain1VO">
+		parameterType="main.java.app.hgm.kr.AppMain1VO">
 		update tbanner2 set
 		link=#{link},title=#{title},umemo=#{umemo}
 		,text1=#{text1},text2=#{text2},creatorimg=#{creatorimg}
@@ -84,7 +84,7 @@
 	</update>
 	
 	<update id="updateAppMain22One"
-		parameterType="main.java.admin.satelite.kr.AppMain1VO">
+		parameterType="main.java.app.hgm.kr.AppMain1VO">
 		update tbanner2 set
 		link=#{link},title=#{title},umemo=#{umemo}
 		,text1=#{text1},text2=#{text2}
@@ -93,13 +93,13 @@
 	</update>
 	
 	<select id="selectAppBanner2One"
-		parameterType="main.java.admin.satelite.kr.AppMain1VO"	resultType="main.java.admin.satelite.kr.AppMain1VO">
+            parameterType="main.java.app.hgm.kr.AppMain1VO" resultType="main.java.app.hgm.kr.AppMain1VO">
 		SELECT sn,code2, imgfile, link, title, umemo, type1, text1, text2, appkind, creatorimg, sdate, stime, edate, etime, sWidth, sHeight, state, positionX, positionY, closeType from tbanner2
 		where sn=#{sn} 
 	</select>
 
 	<insert id="insertAppBanner2One"
-		parameterType="main.java.admin.satelite.kr.AppMain1VO">
+		parameterType="main.java.app.hgm.kr.AppMain1VO">
 		insert into tbanner2 (
 		code2,imgfile,link,title,umemo,type1,text1,text2,appkindc,creatorimg )
 		values ( #{code2}
@@ -167,7 +167,7 @@
 	</select>
 
 	<select id="selectAppMain1List"
-		resultType="main.java.admin.satelite.kr.AppMain1VO"	parameterType="main.java.common.satelite.kr.SearchVO">
+            resultType="main.java.app.hgm.kr.AppMain1VO" parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn, (select title from tbl_project where sn = tbanner2.project) as 'project', code2,imgfile,link,title,umemo,type1,text1,text2,appkind,creatorimg, sdate, stime, edate, etime, sWidth, sHeight, state, positionX, positionY, closeType,regDate,displaytype from tbanner2
 		<include refid="includeAppMain1" />
 
@@ -181,7 +181,7 @@
 	</select>
 
 	<select id="selectAppMain2List"
-		resultType="main.java.admin.satelite.kr.AppMain1VO"
+		resultType="main.java.app.hgm.kr.AppMain1VO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn,code2,imgfile,link,title,umemo,type1,text1,text2,appkind,creatorimg, sdate, stime, edate, etime, sWidth, sHeight, state, positionX, positionY, closeType from tbanner2
 		<include refid="includeAppBanner2" />

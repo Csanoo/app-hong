@@ -1,11 +1,10 @@
 package main.java.common.satelite.kr;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import main.java.admin.satelite.kr.RssSvc;
-import main.java.admin.satelite.kr.RssVO;
+import main.java.app.hgm.kr.RssSvc;
+import main.java.app.hgm.kr.RssVO;
 import org.springframework.stereotype.Component;
 
-import org.springframework.beans.NullValueInNestedPathException;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.net.URL;

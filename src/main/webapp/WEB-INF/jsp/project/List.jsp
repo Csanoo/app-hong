@@ -241,7 +241,7 @@
     }
 
     function fn_formGo() {
-        location.href = "/admin/projectForm";
+        location.href = "/app/projectForm";
     }
 
     function fn_readGo(_a) {
@@ -264,7 +264,7 @@
         else{
             $.ajax({
                 type: "POST",
-                url: "/admin/prtChkDelete",
+                url: "/app/prtChkDelete",
                 data: "RPRT_ODR=" + arr + "&CNT=" + cnt,
                 success: function(jdata){
 
@@ -274,7 +274,7 @@
                         alert("삭제 성공");
                         $.ajax({
                             type: "POST",
-                            url: "/admin/listLoadC",
+                            url: "/app/listLoadC",
                             data: $("#form1").serialize(),
                             success: function(data){
                                 $("#cList").html(data);
@@ -283,7 +283,7 @@
                         });
                     }
                 },
-                error: function(data){location.href = "/admin/project";}
+                error: function(data){location.href = "/app/project";}
             });
         }
     }
@@ -305,7 +305,7 @@
             else {
                 $.ajax({
                     type: "POST",
-                    url: "/admin/prtChkNotPublish",
+                    url: "/app/prtChkNotPublish",
                     data: "RPRT_ODR=" + arr + "&CNT=" + cnt,
                     success: function (jdata) {
 
@@ -315,7 +315,7 @@
                             alert("정상 처리되었습니다.");
                             $.ajax({
                                 type: "POST",
-                                url: "/admin/listLoadC",
+                                url: "/app/listLoadC",
                                 data: $("#form1").serialize(),
                                 success: function(data){
                                     $("#cList").html(data);
@@ -326,7 +326,7 @@
                     },
                     error: function (data) {
                         alert('오류');
-                        //location.href = "/admin/project";
+                        //location.href = "/app/project";
                     }
                 });
             }
@@ -344,7 +344,7 @@
             var cnt = 1;
             $.ajax({
                 type: "POST",
-                url: "/admin/prtChkNotPublish",
+                url: "/app/prtChkNotPublish",
                 data: "RPRT_ODR=" + arr + "&CNT=" + cnt,
                 success: function (jdata) {
 
@@ -354,7 +354,7 @@
                         alert("정상 처리되었습니다.");
                         $.ajax({
                             type: "POST",
-                            url: "/admin/listLoadC",
+                            url: "/app/listLoadC",
                             data: $("#form1").serialize(),
                             success: function(data){
                                 $("#cList").html(data);
@@ -367,7 +367,7 @@
                     alert('삭제오류');
                     $.ajax({
                         type: "POST",
-                        url: "/admin/listLoadC",
+                        url: "/app/listLoadC",
                         data: $("#form1").serialize(),
                         success: function(data){
                             $("#cList").html(data);
@@ -393,7 +393,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/admin/prtSortConfirm",
+                url: "/app/prtSortConfirm",
                 data: "RPRT_ODR=" + arr + "&CNT=" + cnt,
                 success: function (jdata) {
 
@@ -401,12 +401,12 @@
                         alert("오류");
                     } else {
                         alert("정상 처리되었습니다.");
-                        location.href = "/admin/project";
+                        location.href = "/app/project";
                     }
                 },
                 error: function (data) {
                     alert('오류발생');
-                    location.href = "/admin/project";
+                    location.href = "/app/project";
                 }
             });
         }else{
@@ -451,7 +451,7 @@
             var sn = $("#pubproject option:selected").val();
             $( "#category2" ).html('<option value="0">카테고리</option>');
             $( "#category1" ).html('<option value="0">카테고리</option>');
-            $.get("/admin/category01?sn="+sn+"&sel=${searchVO.category01}",function(data){
+            $.get("/app/category01?sn="+sn+"&sel=${searchVO.category01}",function(data){
                 $( "#category1" ).html( data );
                 //alert( "Load was performed." );
             });
@@ -460,7 +460,7 @@
         $("#category1").on("change",function(){
             var sn = $("#category1 option:selected").val();
 
-            $.get("/admin/category02?sn="+sn+"&sel=${searchVO.category01}",function(data){
+            $.get("/app/category02?sn="+sn+"&sel=${searchVO.category01}",function(data){
                 $( "#category2" ).html( data );
                 //alert( "Load was performed." );
             });
@@ -478,7 +478,7 @@
             if(state=='Y'){
                 $.ajax({
                     type: "POST",
-                    url: "/admin/selectSuggetsCt",
+                    url: "/app/selectSuggetsCt",
                     data: "sn=" + sn ,
                     success: function (jdata) {
                         var ct = parseInt(jdata);
@@ -490,7 +490,7 @@
                         }else{
                             $.ajax({
                                 type: "POST",
-                                url: "/admin/prtChkSuggest",
+                                url: "/app/prtChkSuggest",
                                 data: "sn=" + sn +"&state="+state,
                                 success: function (jdata) {
 
@@ -498,12 +498,12 @@
                                         alert(" 오류");
                                     } else {
                                         //  alert("정상 처리되었니다.");
-                                        //  location.href = "/admin/project";
+                                        //  location.href = "/app/project";
                                     }
                                 },
                                 error: function (data) {
                                     // alert(삭제완료);
-                                    location.href = "/admin/project";
+                                    location.href = "/app/project";
                                 }
                             });
                         }
@@ -515,7 +515,7 @@
             }else{
                 $.ajax({
                     type: "POST",
-                    url: "/admin/prtChkSuggest",
+                    url: "/app/prtChkSuggest",
                     data: "sn=" + sn +"&state="+state,
                     success: function (jdata) {
 
@@ -523,12 +523,12 @@
                             alert(" 오류");
                         } else {
                             //  alert("정상 처리되었니다.");
-                            //  location.href = "/admin/project";
+                            //  location.href = "/app/project";
                         }
                     },
                     error: function (data) {
                         // alert(삭제완료);
-                        location.href = "/admin/project";
+                        location.href = "/app/project";
                     }
                 });
                 //alert(state);
@@ -537,11 +537,11 @@
     })
 
     function categorySet(){
-        $.get("/admin/category01?sn=${searchVO.sproject}&sel=${searchVO.category01}",function(data){
+        $.get("/app/category01?sn=${searchVO.sproject}&sel=${searchVO.category01}",function(data){
             $( "#category1" ).html( data );
             //alert( "Load was performed." );
         });
-        $.get("/admin/category02?sn=${searchVO.category01}&sel=${searchVO.category02}",function(data){
+        $.get("/app/category02?sn=${searchVO.category01}&sel=${searchVO.category02}",function(data){
             $( "#category2" ).html( data );
             //alert( "Load was performed." );
         });
@@ -554,7 +554,7 @@
     function fn_list(sn, page) {
         page = 1;
         var ppage = page;
-        $.get("/admin/msgList?sn="+sn+"&page="+page , function(data){
+        $.get("/app/msgList?sn="+sn+"&page="+page , function(data){
             $( "#msgList" ).html( data );
         });
     }

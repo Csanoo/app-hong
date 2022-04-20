@@ -186,7 +186,7 @@
                 formData.append('attachfiles', $("input[name='uploadfile']")[1].files[0]);
                 // alert(formData);
                 $.ajax({
-                    url: '/admin/CategorySave',
+                    url: '/app/CategorySave',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -201,7 +201,7 @@
                     },
                     error: function (data) {
                         //  alert(삭제완료);
-                        //location.href = "/admin/project";
+                        //location.href = "/app/project";
                     }
                 }).done(function (data) {
                     // callback(data);
@@ -232,7 +232,7 @@
                 }
                 // alert(formData);
                 $.ajax({
-                    url: '/admin/categoryUp',
+                    url: '/app/categoryUp',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -247,7 +247,7 @@
                     },
                     error: function (data) {
                         //  alert(삭제완료);
-                        //location.href = "/admin/project";
+                        //location.href = "/app/project";
                     }
                 }).done(function (data) {
                     // callback(data);
@@ -297,7 +297,7 @@
             }
             if(confirm('카테고리를 삭제하시겠습니까? \n하위 카테고리가 있는 경우 함께 삭제되며, 등록된 컨텐츠의 연결은 끊어집니다.')){
 
-            $.get("/admin/categoryFdel?sn="+sn,function(data){alert("정상 처리되었습니다.");cateReload();});
+            $.get("/app/categoryFdel?sn="+sn,function(data){alert("정상 처리되었습니다.");cateReload();});
 
             }
 
@@ -311,7 +311,7 @@
             }
             if(confirm('카테고리를 삭제하시겠습니까?')){
 
-            $.get("/admin/categoryFdel?sn="+sn,function(data){alert("정상 처리되었습니다.");cateReload();});
+            $.get("/app/categoryFdel?sn="+sn,function(data){alert("정상 처리되었습니다.");cateReload();});
 
             }
 
@@ -348,7 +348,7 @@
             var adInfo = $(this).children("input[name='adinfo']").val();
 
             $("input:radio[name='adinfo']:radio[value='"+adInfo+"']").prop('checked', true);
-            $.get("/admin/categoryTList?sn=${projectInfo.projectSn}&pCate="+Sn,function(data){
+            $.get("/app/categoryTList?sn=${projectInfo.projectSn}&pCate="+Sn,function(data){
                 $( "#twoCate" ).html( data );
                 //alert( "Load was performed." );
             });
@@ -381,7 +381,7 @@
 
 
     function cateReload(){
-        $.get("/admin/categoryFList?sn=${projectInfo.projectSn}",function(data){
+        $.get("/app/categoryFList?sn=${projectInfo.projectSn}",function(data){
 
             $( "#ondCate" ).html( data );
             $( "#twoCate" ).html( "" );
@@ -421,7 +421,7 @@
             });
 
             $.ajax({
-                url: '/admin/cateSort',
+                url: '/app/cateSort',
                 type: 'POST',
                 data: "RPRT_ODR=" + arr + "&CNT=" + cnt,
                 success: function (data) {
@@ -431,7 +431,7 @@
                 },
                 error: function (data) {
                     //  alert(삭제완료);
-                    //location.href = "/admin/project";
+                    //location.href = "/app/project";
                 }
             }).done(function (data) {
                 alert("저장되었습니다.");
@@ -447,7 +447,7 @@
         });
 
         $.ajax({
-            url: '/admin/cateSort',
+            url: '/app/cateSort',
             type: 'POST',
             data: "RPRT_ODR=" + arr + "&CNT=" + cnt,
             success: function (data) {
@@ -457,7 +457,7 @@
             },
             error: function (data) {
                 //  alert(삭제완료);
-                //location.href = "/admin/project";
+                //location.href = "/app/project";
             }
         }).done(function (data) {
             alert("저장되었습니다.");

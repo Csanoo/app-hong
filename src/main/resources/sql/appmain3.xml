@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="satelite.kr">
+<mapper namespace="hgm.kr">
 
 	<delete id="appmain3Delete"
 		parameterType="String">
@@ -11,7 +11,7 @@
 
 	<select id="selectAppMain3One"
 		parameterType="String"
-		resultType="main.java.admin.satelite.kr.AppMain3VO">
+		resultType="main.java.app.hgm.kr.AppMain3VO">
 		SELECT sn,code2,imgfile,link,uname,umemo,type1,text1,text2,appkind,creatorimg
 		from tbanner2
 		where sn=#{sn}
@@ -20,7 +20,7 @@
 
 
 	<insert id="insertAppMain3One"
-		parameterType="main.java.admin.satelite.kr.AppMain3VO">
+		parameterType="main.java.app.hgm.kr.AppMain3VO">
 		insert into tbanner2 (
 		code2,imgfile,link,uname,umemo,type1,text1,text2,appkind,creatorimg )
 		values ( #{code2}
@@ -28,7 +28,7 @@
 	</insert>
 
 	<update id="updateAppMain3One"
-		parameterType="main.java.admin.satelite.kr.AppMain3VO">
+		parameterType="main.java.app.hgm.kr.AppMain3VO">
 		update tbanner2 set
 		code2=#{code2},imgfile=#{imgfile},link=#{link},uname=#{uname},umemo=#{umemo}
 		,text1=#{text1},text2=#{text2},creatorimg=#{creatorimg}
@@ -37,7 +37,7 @@
 	</update>
 
 	<update id="updateAppMain33One"
-		parameterType="main.java.admin.satelite.kr.AppMain3VO">
+		parameterType="main.java.app.hgm.kr.AppMain3VO">
 		update tbanner2 set
 		code2=#{code2},link=#{link},uname=#{uname},umemo=#{umemo}
 		,text1=#{text1},text2=#{text2}
@@ -46,7 +46,7 @@
 	</update>
 
 	<update id="updateAppMain4One"
-		parameterType="main.java.admin.satelite.kr.AppMain3VO">
+		parameterType="main.java.app.hgm.kr.AppMain3VO">
 		update tbanner2 set
 		code2=#{code2},imgfile=#{imgfile},link=#{link},uname=#{uname},umemo=#{umemo}
 		,text1=#{text1},text2=#{text2},creatorimg=#{creatorimg}
@@ -55,7 +55,7 @@
 	</update>
 
 	<update id="updateAppMain44One"
-		parameterType="main.java.admin.satelite.kr.AppMain3VO">
+		parameterType="main.java.app.hgm.kr.AppMain3VO">
 		update tbanner2 set
 		code2=#{code2},link=#{link},uname=#{uname},umemo=#{umemo}
 		,text1=#{text1},text2=#{text2}
@@ -64,14 +64,14 @@
 	</update>
 
 	<select id="selectAppMain4One"
-		parameterType="main.java.admin.satelite.kr.AppMain3VO"
-		resultType="main.java.admin.satelite.kr.AppMain3VO">
+		parameterType="main.java.app.hgm.kr.AppMain3VO"
+		resultType="main.java.app.hgm.kr.AppMain3VO">
 		SELECT sn,code2,imgfile,link,uname,umemo,type1,text1,text2,appkind,creatorimg from tbanner2
 		where sn=#{sn}
 	</select>
 
 	<insert id="insertAppMain4One"
-		parameterType="main.java.admin.satelite.kr.AppMain3VO">
+		parameterType="main.java.app.hgm.kr.AppMain3VO">
 		insert into tbanner2 (
 		code2,imgfile,link,uname,umemo,type1,text1,text2,appkind,creatorimg )
 		values ( #{code2}
@@ -136,7 +136,7 @@
 	</select>
 
 	<select id="selectAppMain3List"
-		resultType="main.java.admin.satelite.kr.AppMain3VO"
+		resultType="main.java.app.hgm.kr.AppMain3VO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn,code2,imgfile,link,uname,umemo,type1,text1,text2,appkind,creatorimg from tbanner2
 		<include refid="includeAppMain3" />
@@ -151,7 +151,7 @@
 	</select>
 
 	<select id="selectAppMain4List"
-		resultType="main.java.admin.satelite.kr.AppMain3VO"
+		resultType="main.java.app.hgm.kr.AppMain3VO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn,code2,imgfile,link,uname,umemo,type1,text1,text2,appkind,creatorimg from tbanner2
 		<include refid="includeAppMain4" />

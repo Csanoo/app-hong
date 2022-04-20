@@ -1,6 +1,5 @@
 package main.java.common.satelite.kr;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.sql.DriverManager;
 
@@ -9,19 +8,10 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
-import main.java.admin.satelite.kr.RssVO;
-import main.java.admin.satelite.kr.ContentsSvc;
-import main.java.admin.satelite.kr.ContentsVO;
+import main.java.app.hgm.kr.RssVO;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.quartz.CronScheduleBuilder;
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
 import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
-import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.stereotype.Component;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +20,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;

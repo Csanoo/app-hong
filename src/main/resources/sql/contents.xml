@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="satelite.kr">
+<mapper namespace="hgm.kr">
 
 	<delete id="contentsDelete"
 		parameterType="String">
@@ -16,20 +16,20 @@
 
 	<select id="selectcontentsOne"
 		parameterType="String"
-		resultType="main.java.admin.satelite.kr.ContentsVO">
+		resultType="main.java.app.hgm.kr.ContentsVO">
 		SELECT sn, category, type, imageUrl, videoUrl, ctSource, title, regDate from tbl_contents
 		where sn=#{sn} 
 	</select>
 
 	<insert id="insertcontentsOne"
-		parameterType="main.java.admin.satelite.kr.ContentsVO">
+		parameterType="main.java.app.hgm.kr.ContentsVO">
 		insert into tbl_contents (project,
 		category, type, imageUrl, videoUrl, ctSource, title )
 		values ( #{project}, #{category}, #{type} , #{imageUrl},#{videoUrl},#{ctSource},#{title} )
 	</insert>
 
 	<update id="updatecontents"
-		parameterType="main.java.admin.satelite.kr.ContentsVO">
+		parameterType="main.java.app.hgm.kr.ContentsVO">
 		update tbl_contents set
 		project = #{project}, category=#{category},type=#{type},imageUrl=#{imageUrl}
 		,videoUrl=#{videoUrl},ctSource=#{ctSource},title=#{title}
@@ -69,7 +69,7 @@
 
 
 	<select id="selectcontentsList"
-		resultType="main.java.admin.satelite.kr.ContentsVO"
+		resultType="main.java.app.hgm.kr.ContentsVO"
 		parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn, category,  (select title from tcode where code1='TYPE' and code2=tbl_contents.type) as 'type', imageUrl, videoUrl, (select title from tcode where code1='CONT' and code2=tbl_contents.ctSource) as 'ctSource', title, pubDate as 'regDate',userid as 'regid', keyword  from tbl_contents
 		<include refid="includecontents" />
@@ -77,7 +77,7 @@
 		LIMIT ${rowStart-1}, #{pageNo}
 	</select>
 	<select id="selectexcelList"
-			resultType="main.java.admin.satelite.kr.ContentsVO"
+			resultType="main.java.app.hgm.kr.ContentsVO"
 			parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn, category,  (select title from tcode where code1='TYPE' and code2=tbl_contents.type) as 'type', imageUrl, videoUrl, (select title from tcode where code1='CONT' and code2=tbl_contents.ctSource) as 'ctSource', title,  pubDate as 'regDate',userid as 'regid', keyword from tbl_contents
 		<include refid="includecontents" />
@@ -97,39 +97,39 @@
 		where sn=#{sn}
 	</delete>
 
-	<update id="ContentsPublish" parameterType="main.java.admin.satelite.kr.ContentsVO">
+	<update id="ContentsPublish" parameterType="main.java.app.hgm.kr.ContentsVO">
 		update tbl_contents set
 		state = "200"
 		where sn=#{sn}
 	</update>
 
-	<insert id="insertContentsPublish"	parameterType="main.java.admin.satelite.kr.ContentsVO">
+	<insert id="insertContentsPublish"	parameterType="main.java.app.hgm.kr.ContentsVO">
 		insert into tbl_mapping_contents (projectSn, category01, category02, contentsSn )
 		select  #{project}, #{category01}, #{category02}, #{sn}   from dual WHERE NOT EXISTS  (SELECT sn FROM tbl_mapping_contents WHERE projectSn = #{project} and category01 = #{category01} and category02 = #{category02}  and contentsSn  = #{sn} )
 	</insert>
 
-	<update id="ContentsMove" parameterType="main.java.admin.satelite.kr.ContentsVO">
+	<update id="ContentsMove" parameterType="main.java.app.hgm.kr.ContentsVO">
 		update tbl_contents set
 		state = "100"
 		,pubDate = now()
 		where sn=#{sn}
 	</update>
-	<update id="ContentsUpdate" parameterType="main.java.admin.satelite.kr.ContentsVO">
+	<update id="ContentsUpdate" parameterType="main.java.app.hgm.kr.ContentsVO">
 		update tbl_contents set
 		title = #{title}
 		where sn=#{sn}
 	</update>
 
-	<select id="selectBoxprojectCon" resultType="main.java.admin.satelite.kr.ContentsVO"	parameterType="main.java.common.satelite.kr.SearchVO">
+	<select id="selectBoxprojectCon" resultType="main.java.app.hgm.kr.ContentsVO" parameterType="main.java.common.satelite.kr.SearchVO">
 		SELECT sn, title  from tbl_project order by sn asc
 	</select>
 
-	<select id="selectSourceSelListC" resultType="main.java.admin.satelite.kr.ContentsVO" >
+	<select id="selectSourceSelListC" resultType="main.java.app.hgm.kr.ContentsVO" >
 		SELECT code2,title from tcode where code1 = 'CONT'
 	</select>
 
 	<insert id="insertrsscontentsOne"
-			parameterType="main.java.admin.satelite.kr.ContentsVO">
+			parameterType="main.java.app.hgm.kr.ContentsVO">
 		insert into tbl_contents (project,
 		category01,category02, type, imageUrl, videoUrl, ctSource, title, sText )
 		select  #{project}, #{category01}, #{category02}, #{type} , #{imageUrl},#{videoUrl},#{ctSource},#{title},#{sText}  from dual WHERE NOT EXISTS  (SELECT sn FROM tbl_contents WHERE videoUrl = #{videoUrl} )

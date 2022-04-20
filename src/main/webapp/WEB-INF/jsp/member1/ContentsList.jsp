@@ -142,7 +142,7 @@ return hour + "시간 " + min + "분 ";
 											<td><a href="${listview.url}">${listview.title}</a></td>
 											<td>${listview.regdate}</td>
 											<td>
-												<button type="button" class="btn btn-orange" onclick="window.location.href='/admin/ContentsDelete?sn=${listview.sn}'">삭제</button>
+												<button type="button" class="btn btn-orange" onclick="window.location.href='/app/ContentsDelete?sn=${listview.sn}'">삭제</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -187,7 +187,7 @@ return hour + "시간 " + min + "분 ";
 
 <script>
 	function fn_formGo() {
-		location.href = "/admin/ContentsForm";
+		location.href = "/app/ContentsForm";
 	}
 </script>
 

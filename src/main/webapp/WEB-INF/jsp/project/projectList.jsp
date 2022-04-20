@@ -168,12 +168,12 @@
 
     function fn_formGo() {
 
-        location.href = "/admin/projectForm";
+        location.href = "/app/projectForm";
     }
 
     function readPost(_a) {
         document.form1.sn.value = _a;
-        document.form1.action = "/admin/projectDetail";
+        document.form1.action = "/app/projectDetail";
         document.form1.submit();
     }
 
@@ -183,7 +183,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/admin/prtDelete",
+            url: "/app/prtDelete",
             data: "sn=" + _a,
             success: function(jdata){
 
@@ -191,10 +191,10 @@
                     alert("삭제 오류");
                 }else{
                     alert("삭제 성공");
-                    location.href = "/admin/projectList";
+                    location.href = "/app/projectList";
                 }
             },
-            error: function(data){location.href = "/admin/projectList";}
+            error: function(data){location.href = "/app/projectList";}
         });
 
     }

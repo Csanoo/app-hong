@@ -1,6 +1,6 @@
 package main.java.common.satelite.kr;
 
-import main.java.admin.satelite.kr.Member1Svc;
+import main.java.app.hgm.kr.Member1Svc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

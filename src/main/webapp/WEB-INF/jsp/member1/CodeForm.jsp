@@ -217,7 +217,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/admin/selCodeTitCt",
+                url: "/app/selCodeTitCt",
                 data: "code2=" + title,
                 success: function (jdata) {
                     if(jdata<1){

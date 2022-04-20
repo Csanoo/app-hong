@@ -137,7 +137,7 @@ public class Search {
             //   qry = "insert into tcontents ( title, keyword, videoUrl, userid, ctSource, imageURL, category)"
             //            + " values ('"+singleVideo.getSnippet().getTitle()
             //            +"','"+singleVideo.getSnippet().getTitle()+"','"
-            //            +rId.getVideoId()+"','admin','유튜브','"+thumbnailURL+"','"+_kind+"') ";
+            //            +rId.getVideoId()+"','app','유튜브','"+thumbnailURL+"','"+_kind+"') ";
 
             // qry = "insert into tcontents ( title, memo, url, userid, code2, imgfile, category)"
             //		+ " values ('"+singleVideo.getSnippet().getTitle()
