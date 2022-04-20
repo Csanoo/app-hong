@@ -68,6 +68,8 @@
 			<mvc:mapping path="/usertypeRead"/>
 			<mvc:mapping path="/userTypeForm"/>
 			<mvc:mapping path="/rssReg"/>
+			<mvc:mapping path="/main" />
+			<mvc:mapping path="/member" />
 
 			<bean class="main.java.common.satelite.kr.AuthLoginInterceptor"/>
 		</mvc:interceptor>

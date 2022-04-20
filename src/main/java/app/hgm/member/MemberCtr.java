@@ -190,19 +190,16 @@ public class MemberCtr {
 		searchVO.setAction("memberList");
 		modelMap.addAttribute("listview", listview);
 		modelMap.addAttribute("searchVO", searchVO);
-
-
-
-
 		return "redirect:memberList";
 
 	}
-	@ResponseBody
+
+
 	@RequestMapping(value = "/login")
 	public String Login(MemberVO mvo, HttpServletRequest request, SearchVO searchVO, ModelMap modelMap,
 						HttpSession session) {
 
-		return "main/index";
+		return "member/login";
 	}
 
 	@ResponseBody
