@@ -13,9 +13,17 @@
 
     <mvc:annotation-driven />
 
-	<mvc:resources mapping="/design/**" location="/design/" />
+	<mvc:resources location="/design/css/" mapping="/css/**" />
+	<mvc:resources location="/design/assets/" mapping="/assets/**" />
+	<mvc:resources location="/design/fonts/" mapping="/fonts/**" />
+	<mvc:resources location="/design/images/" mapping="/images/**" />
+	<mvc:resources location="/design/js/" mapping="/js/**" />
+	<mvc:resources location="/design/switcher/" mapping="/switcher/**" />
+	<mvc:resources mapping="/upload/**" location="/main/webapp/upload/" />
+
+
 	<!--  컨트롤러등을 찾는 기본 패키지 경로  -->
-	<context:component-scan base-package="main.java.admin" />
+	<context:component-scan base-package="main.java.app" />
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix"><value>/WEB-INF/jsp/</value></property>
@@ -30,7 +38,6 @@
         <property name="maxUploadSize" value="10000000" />
         <property name="maxInMemorySize" value="100000000" />
     </bean>
-	<mvc:resources mapping="/upload/**" location="/upload/" />
 
 	<!--bean id="AuthLoginInterceptor" class="main.java.common.satelite.kr.AuthLoginInterceptor">
 	</bean>-->

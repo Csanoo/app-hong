@@ -1,8 +1,7 @@
 <Context crossContext="true" sessionCookiePath="/">
 	<Resource
 			auth="Container"
-			driverClassName="com.mysql.jdbc.Driver"
-
+			driverClassName="com.mysql.cj.jdbc.Driver"
 			maxIdle="30"
 
 			name="jdbc/mdvsds"
