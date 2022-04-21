@@ -21,21 +21,18 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		  destroy-method="close"
 		  p:driverClassName="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
-		  p:url="jdbc:log4jdbc:mysql://localhost:3306/motiva?serverTimezone=UTC"
+		  p:url="jdbc:log4jdbc:mysql://localhost:3306/hongji?serverTimezone=UTC"
 		  p:username="crdb" p:password="admin123"
 		  p:initialSize="21"
 		  p:maxActive="500"
 		  p:maxIdle="500"
 		  p:maxWait="30000"
 		  p:validationQuery="SELECT 1" />
-
-
 	<!-- SqlSession setup for MyBatis Database Layer -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath*:/main/resources/sql/*.xml" />
 	</bean>
-
 
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSession"></constructor-arg>

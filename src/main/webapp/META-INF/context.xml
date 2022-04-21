@@ -12,6 +12,6 @@
 			removeAbandonedTimeout="60"
 			logAbandoned="true"
 			factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
-			url="jdbc:mysql://localhost:3306/motiva?serverTimezone=UTC"
+			url="jdbc:mysql://localhost:3306/hongji?serverTimezone=UTC"
 	/>
 </Context>
