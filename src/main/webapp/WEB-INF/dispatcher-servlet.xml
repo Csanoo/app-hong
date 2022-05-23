@@ -21,14 +21,12 @@
 	<mvc:resources location="/design/switcher/" mapping="/switcher/**" />
 	<mvc:resources mapping="/upload/**" location="/main/webapp/upload/" />
 
-
 	<!--  컨트롤러등을 찾는 기본 패키지 경로  -->
 	<context:component-scan base-package="main.java.app" />
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix"><value>/WEB-INF/jsp/</value></property>
 		<property name="suffix"><value>.jsp</value></property>
-
 	</bean>
 	
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
@@ -39,45 +37,18 @@
         <property name="maxInMemorySize" value="100000000" />
     </bean>
 
-	<!--bean id="AuthLoginInterceptor" class="main.java.common.satelite.kr.AuthLoginInterceptor">
+	<!--bean id="AuthLoginInterceptor" class="main.java.app.common.satelite.kr.AuthLoginInterceptor">
 	</bean>-->
 	<!-- Interceptor 설정 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/project"/>
-			<mvc:mapping path="/contents"/>
-			<mvc:mapping path="/PostList"/>
-			<mvc:mapping path="/AppMain1"/>
-			<mvc:mapping path="/appmain1Form"/>
-			<mvc:mapping path="/BannerList"/>
-			<mvc:mapping path="/bannerForm"/>
-			<mvc:mapping path="/ytbForm"/>
-			<mvc:mapping path="/projectList"/>
-			<mvc:mapping path="/projectReg"/>
-			<mvc:mapping path="/memberList"/>
-			<mvc:mapping path="/regist"/>
-			<mvc:mapping path="/excelForm"/>
-			<mvc:mapping path="/usertypeList"/>
-			<mvc:mapping path="/appmain1Read"/>
-			<mvc:mapping path="/bannerRead"/>
-			<mvc:mapping path="/reserveForm"/>
-			<mvc:mapping path="/codeList"/>
-			<mvc:mapping path="/projectDetail"/>
-			<mvc:mapping path="/categoryDetail"/>
-			<mvc:mapping path="/member1Read"/>
-			<mvc:mapping path="/usertypeRead"/>
-			<mvc:mapping path="/userTypeForm"/>
-			<mvc:mapping path="/rssReg"/>
-			<mvc:mapping path="/main" />
-			<mvc:mapping path="/member" />
-
-			<bean class="main.java.common.satelite.kr.AuthLoginInterceptor"/>
+			<mvc:mapping path="/mypage/*" />
+			<bean class="main.java.edumgt.common.util.AuthLoginInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 
-
-	<context:component-scan base-package="main.java.common.satelite.kr" />
+<!--
 	<task:scheduler id="jobScheduler" pool-size="10"/>
 	<task:annotation-driven scheduler="jobScheduler"/>
-
+-->
 </beans>

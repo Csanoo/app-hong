@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<jsp:include page="/WEB-INF/jsp/common/LeftMenu2.jsp" />
+<jsp:include page="/WEB-INF/jsp/layout/header.jsp" />
 
             <section id="main-content" class=" ">
                 <section class="wrapper" style='margin-top:60px;display:inline-block;width:100%;padding:15px 0 0 15px;'>
@@ -49,6 +49,6 @@
             <!-- END CONTENT -->
             
             
-            <jsp:include page="/WEB-INF/jsp/common/Footer2.jsp" />
+            <jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />
 
 

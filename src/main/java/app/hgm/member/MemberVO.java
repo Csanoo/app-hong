@@ -5,329 +5,376 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public class MemberVO {
-
-	private List<MultipartFile> uploadfile;
-
-	public List<MultipartFile> getUploadfile() {
-		return uploadfile;
-	}
-
-	public void setUploadfile(List<MultipartFile> uploadfile) {
-		this.uploadfile = uploadfile;
-	}
-
-	private String contcnt = "";
-
-	private String mxwdt = "";
-
-	public String getMxwdt() {
-		return mxwdt;
-	}
-
-	public void setMxwdt(String mxwdt) {
-		this.mxwdt = mxwdt;
-	}
-
-	private String fucheck = "";
-
-	public String getFucheck() {
-		return fucheck;
-	}
-	public void setFucheck(String fucheck) {
-		this.fucheck = fucheck;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	public String getImgfile() {
-		return imgfile;
-	}
-	public void setImgfile(String imgfile) {
-		this.imgfile = imgfile;
-	}
-	private String category = "";
-	private String imgfile = "";
-	public String getContcnt() {
-		return contcnt;
-	}
-	public void setContcnt(String contcnt) {
-		this.contcnt = contcnt;
-	}
-	public String getTimecnt() {
-		return timecnt;
-	}
-	public void setTimecnt(String timecnt) {
-		this.timecnt = timecnt;
-	}
-	public String getTodaycnt() {
-		return todaycnt;
-	}
-	public void setTodaycnt(String todaycnt) {
-		this.todaycnt = todaycnt;
-	}
-	public String getUsercnt() {
-		return usercnt;
-	}
-	public void setUsercnt(String usercnt) {
-		this.usercnt = usercnt;
-	}
-	private String timecnt = "";
-	private String todaycnt = "";
-	private String usercnt = "";
+	private Integer idx;
+	private String id = "";
+	private String passwd = "";
+	private String name = "";
+	private String photo = "";
+	private String icon = "";
+	private String nick = "";
+	private String resno = "";
+	private String email = "";
+	private String tphone = "";
+	private String hphone = "";
+	private String comtel = "";
+	private String homepage = "";
+	private String post = "";
+	private String address1 = "";
+	private String address2 = "";
+	private String reemail = "";
+	private String resms = "";
+	private String birthday = "";
+	private String bgubun = "";
+	private String marriage = "";
+	private String memorial = "";
+	private String scholarship = "";
+	private String job = "";
+	private String income = "";
+	private String car = "";
+	private String hobby = "";
+	private String consph = "";
+	private String conprd = "";
+	private String level = "";
+	private String recom = "";
+	private String visit = "";
+	private String visit_time = "";
+	private String intro = "";
+	private String memo = "";
+	private String addinfo1 = "";
+	private String addinfo2 = "";
+	private String addinfo3 = "";
+	private String addinfo4 = "";
+	private String addinfo5 = "";
+	private String wdate = "";
 
 
-	private String looktime = "";
+	public Integer getIdx() {
+		return idx;
+	}
 
-	public String getLooktime() {
-		return looktime;
+	public void setIdx(Integer idx) {
+		this.idx = idx;
 	}
-	public void setLooktime(String looktime) {
-		this.looktime = looktime;
-	}
-	private String code1memo="";
 
-	public String getCode1memo() {
-		return code1memo;
+	public String getId() {
+		return id;
 	}
-	public void setCode1memo(String code1memo) {
-		this.code1memo = code1memo;
-	}
-	private String userid="";
 
-	private String ccnt="";
-
-	public String getCcnt() {
-		return ccnt;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public void setCcnt(String ccnt) {
-		this.ccnt = ccnt;
-	}
-	private String sn="";
-	public String getSn() {
-		return sn;
-	}
-	public void setSn(String sn) {
-		this.sn = sn;
-	}
-	public String getCode1() {
-		return code1;
-	}
-	public void setCode1(String code1) {
-		this.code1 = code1;
-	}
-	public String getCode2() {
-		return code2;
-	}
-	public void setCode2(String code2) {
-		this.code2 = code2;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getMemo() {
-		return memo;
-	}
-	public void setMemo(String memo) {
-		this.memo = memo;
-	}
-	private String code1="";
-
-	private String url="";
-
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	private String code2="";
-	private String title="";
-	private String memo="";
 
 
-	private String mobile="";
-	public String getMobile() {
-		return mobile;
+	public String getPasswd() {
+		return passwd;
 	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public String getResno() {
+		return resno;
+	}
+
+	public void setResno(String resno) {
+		this.resno = resno;
+	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getTphone() {
+		return tphone;
+	}
+
+	public void setTphone(String tphone) {
+		this.tphone = tphone;
+	}
+
+	public String getHphone() {
+		return hphone;
+	}
+
+	public void setHphone(String hphone) {
+		this.hphone = hphone;
+	}
+
+	public String getComtel() {
+		return comtel;
+	}
+
+	public void setComtel(String comtel) {
+		this.comtel = comtel;
+	}
+
+	public String getHomepage() {
+		return homepage;
+	}
+
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
+	}
+
+
+	public String getPost() {
+		return post;
+	}
+
+	public void setPost(String post) {
+		this.post = post;
+	}
+
+	public String getAddress1() {
+		return address1;
+	}
+
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public String getReemail() {
+		return reemail;
+	}
+
+	public void setReemail(String reemail) {
+		this.reemail = reemail;
+	}
+
+	public String getResms() {
+		return resms;
+	}
+
+	public void setResms(String resms) {
+		this.resms = resms;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getBgubun() {
+		return bgubun;
+	}
+
+	public void setBgubun(String bgubun) {
+		this.bgubun = bgubun;
+	}
+
+	public String getMarriage() {
+		return marriage;
+	}
+
+	public void setMarriage(String marriage) {
+		this.marriage = marriage;
+	}
+
+	public String getMemorial() {
+		return memorial;
+	}
+
+	public void setMemorial(String memorial) {
+		this.memorial = memorial;
+	}
+
+	public String getScholarship() {
+		return scholarship;
+	}
+
+	public void setScholarship(String scholarship) {
+		this.scholarship = scholarship;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	public String getIncome() {
+		return income;
+	}
+
+	public void setIncome(String income) {
+		this.income = income;
+	}
+
+	public String getCar() {
+		return car;
+	}
+
+	public void setCar(String car) {
+		this.car = car;
+	}
+
+	public String getHobby() {
+		return hobby;
+	}
+
+	public void setHobby(String hobby) {
+		this.hobby = hobby;
+	}
+
+	public String getConsph() {
+		return consph;
+	}
+
+	public void setConsph(String consph) {
+		this.consph = consph;
+	}
+
+	public String getConprd() {
+		return conprd;
+	}
+
+	public void setConprd(String conprd) {
+		this.conprd = conprd;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getRecom() {
+		return recom;
+	}
+
+	public void setRecom(String recom) {
+		this.recom = recom;
+	}
+
+	public String getVisit() {
+		return visit;
+	}
+
+	public void setVisit(String visit) {
+		this.visit = visit;
+	}
+
+	public String getVisit_time() {
+		return visit_time;
+	}
+
+	public void setVisit_time(String visit_time) {
+		this.visit_time = visit_time;
+	}
+
+	public String getIntro() {
+		return intro;
+	}
+
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+	public String getAddinfo1() {
+		return addinfo1;
+	}
+
+	public void setAddinfo1(String addinfo1) {
+		this.addinfo1 = addinfo1;
+	}
+
+	public String getAddinfo2() {
+		return addinfo2;
+	}
+
+	public void setAddinfo2(String addinfo2) {
+		this.addinfo2 = addinfo2;
+	}
+
+	public String getAddinfo3() {
+		return addinfo3;
+	}
+
+	public void setAddinfo3(String addinfo3) {
+		this.addinfo3 = addinfo3;
+	}
+
+	public String getAddinfo4() {
+		return addinfo4;
+	}
+
+	public void setAddinfo4(String addinfo4) {
+		this.addinfo4 = addinfo4;
+	}
+
+	public String getAddinfo5() {
+		return addinfo5;
+	}
+
+	public void setAddinfo5(String addinfo5) {
+		this.addinfo5 = addinfo5;
+	}
+
 	public String getWdate() {
 		return wdate;
 	}
+
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
-	private String email="";
-	private String wdate="";
-
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-	public String getUserpw() {
-		return userpw;
-	}
-	public void setUserpw(String userpw) {
-		this.userpw = userpw;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getUsertype() {
-		return usertype;
-	}
-	public void setUsertype(String usertype) {
-		this.usertype = usertype;
-	}
-	private String userpw="";
-	private String username="";
-	private String usertype="";
-
-	private String regdate;
-
-	public String getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-
-	private String uptDate;
-	public String getUptDate() {
-		return uptDate;
-	}
-	public void setUptDate(String uptDate) {
-		this.uptDate = uptDate;
-	}
-
-	private String uptuser;
-	public String getUptuser() {
-		return uptuser;
-	}
-	public void setUptuser(String uptuser) {
-		this.uptuser = uptuser;
-	}
-
-	private String state ="";
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	private Integer projectct;
-	public Integer getProjectct() {
-		return projectct;
-	}
-	public void setProjectct(Integer projectct) {
-		this.projectct = projectct;
-	}
-
-	private String ctSource="";
-	public void setCtSource(String ctSource) {
-		this.ctSource = ctSource;
-	}
-	public String getCtSource() {
-		return ctSource;
-	}
-
-	private String keyword="";
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-	public String getKeyword() {
-		return keyword;
-	}
-
-	private String type="";
-	public void setType(String type) {
-		this.type = type;
-	}
-	public String getType() {
-		return type;
-	}
-
-	private String imageUrl ="";
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	private String videoUrl ="";
-	public void setVideoUrl(String videoUrl) {
-		this.videoUrl = videoUrl;
-	}
-	public String getVideoUrl() {
-		return videoUrl;
-	}
-
-	private String crtdate="";
-	public void setCrtdate(String crtdate) {
-		this.crtdate = crtdate;
-	}
-	public String getCrtdate() {
-		return crtdate;
-	}
-
-	private String regid="";
-	public void setRegid(String regid) {
-		this.regid = regid;
-	}
-	public String getRegid() {
-		return regid;
-	}
-
-	private String menu01 = "N";
-	public void setMenu01(String menu01) {
-		this.menu01 = menu01;
-	}
-	public String getMenu01() {
-		return menu01;
-	}
-
-	private String menu02 = "N";
-	public void setMenu02(String menu02) {
-		this.menu02 = menu02;
-	}
-	public String getMenu02() {
-		return menu02;
-	}
-
-	private String menu03 = "N";
-	public void setMenu03(String menu03) {
-		this.menu03 = menu03;
-	}
-	public String getMenu03() {
-		return menu03;
-	}
-
-	private String menu04 = "N";
-	public void setMenu04(String menu04) {
-		this.menu04 = menu04;
-	}
-	public String getMenu04() {
-		return menu04;
-	}
-
 }

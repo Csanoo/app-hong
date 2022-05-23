@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main.java.app.hgm.course">
+
+	<select id="countCourse" parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="Integer">
+		SELECT COUNT(*)
+		FROM wiz_clrelation wc, wiz_lecture wp, wiz_leccat wy
+		<where>
+		 wy.catuse != 'N'
+		<if test="catcode != null">AND  wc.catcode=${catcode} </if>
+		<if test="searchKey != null">AND wp.lecname like ${searchKey} </if>
+			and wc.catcode = wy.catcode and wc.leccode = wp.leccode and wp.showset != 'N'
+		</where>
+		order by wp.leccode desc
+	</select>
+
+	<select id="selectCourse"   parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="main.java.app.hgm.course.CourseVO">
+		SELECT  distinct wp.leccode,wp.teacheridx,wp.teacheridx2, wp.lecname, wp.stortexp, wp.reserve, wp.sellprice, wp.strprice, wp.lecimg_R, wp.popular, wp.recom, wp.new as newc, wp.best, wp.sale, wp.lecicon,
+						 wp.conprice, wp.coupon_use, wp.coupon_type, wp.coupon_dis, wp.coupon_amount, wp.coupon_limit, wp.coupon_edate,
+						 wp.term, wp.info_name1, wp.info_value1, wp.info_name2, wp.info_value2, wp.viewcnt
+		FROM wiz_clrelation wc, wiz_lecture wp, wiz_leccat wy
+		WHERE
+			wy.catuse != 'N'
+			<if test="catcode != null">AND  wc.catcode=${catcode} </if>
+			<if test="searchKey != null">AND wp.lecname like ${searchKey} </if>
+			and wc.catcode = wy.catcode and wc.leccode = wp.leccode and wp.showset != 'N'
+		order by
+		<if test="oderby == null">wp.leccode desc</if>
+		<if test="oderby != null">${oderby}</if>
+
+
+	</select>
+
+	<select id="countCP" parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="Integer">
+		SELECT COUNT(*)
+		from wiz_cprelation wc, wiz_product wp, wiz_category wy
+		<where>
+			wy.catuse != 'N' and wc.catcode = wy.catcode and wc.prdcode = wp.prdcode and wp.showset != 'N' and left(wc.catcode, 2) = '12'
+			<if test="catcode != null">AND  wc.catcode=${catcode} </if>
+			<if test="searchKey != null">AND wp.prdname like ${searchKey} </if>
+		</where>
+
+		order by wp.prdcode desc
+	</select>
+
+	<select id="selectCP"   parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="main.java.app.hgm.course.CourseVO">
+		SELECT distinct wc.catcode, wp.prdcode, wp.prdname, wp.stortexp, wp.prdcom, wp.reserve, wp.sellprice, wp.strprice, wp.prdimg_R
+		, wp.popular, wp.recom, wp.new as newc, wp.best, wp.sale, wp.shortage, wp.prdicon, wp.stock
+		,wp.conprice, wp.coupon_use, wp.coupon_type, wp.coupon_dis, wp.coupon_amount, wp.coupon_limit, wp.coupon_edate
+		from wiz_cprelation wc, wiz_product wp, wiz_category wy
+		<where>
+			wy.catuse != 'N' and wc.catcode = wy.catcode and wc.prdcode = wp.prdcode and wp.showset != 'N' and left(wc.catcode, 2) = '12'
+			<if test="catcode != null">AND  wc.catcode=${catcode} </if>
+			<if test="searchKey != null">AND wp.prdname like ${searchKey} </if>
+		</where>
+		order by wp.prdcode desc
+	</select>
+
+	<select id="countBook" parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="Integer">
+		SELECT COUNT(*)
+		from wiz_cprelation wc, wiz_product wp, wiz_category wy
+		<where>
+			wy.catuse != 'N' and wc.catcode = wy.catcode and wc.prdcode = wp.prdcode and wp.showset != 'N' and (left(wc.catcode, 2) = '13' or left(wc.catcode, 2) = '10' or left(wc.catcode, 2) = '11' )
+			<if test="catcode != null">AND  wc.catcode=${catcode} </if>
+			<if test="searchKey != null">AND wp.prdname like ${searchKey} </if>
+		</where>
+
+		order by wp.prdcode desc
+	</select>
+
+	<select id="selectBook"   parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="main.java.app.hgm.course.CourseVO">
+		SELECT distinct wc.catcode, wp.prdcode, wp.prdname, wp.stortexp, wp.prdcom, wp.reserve, wp.sellprice, wp.strprice, wp.prdimg_R
+		, wp.popular, wp.recom, wp.new as newc, wp.best, wp.sale, wp.shortage, wp.prdicon, wp.stock
+		,wp.conprice, wp.coupon_use, wp.coupon_type, wp.coupon_dis, wp.coupon_amount, wp.coupon_limit, wp.coupon_edate
+		from wiz_cprelation wc, wiz_product wp, wiz_category wy
+		<where>
+			wy.catuse != 'N' and wc.catcode = wy.catcode and wc.prdcode = wp.prdcode and wp.showset != 'N' and (left(wc.catcode, 2) = '13' or left(wc.catcode, 2) = '10' or left(wc.catcode, 2) = '11' )
+			<if test="catcode != null">AND  wc.catcode=${catcode} </if>
+			<if test="searchKey != null">AND wp.prdname like ${searchKey} </if>
+		</where>
+		order by wp.prdcode desc
+	</select>
+
+    <select id="countMyCourse"
+            parameterType="main.java.app.hgm.course.CourseExample"
+            resultType="Integer">
+		SELECT COUNT(*)
+		FROM wiz_lecatt as wa
+		LEFT JOIN wiz_clrelation as wc on wa.leccode = wc.leccode
+	 	LEFT JOIN wiz_leccat as wcat on wc.catcode = wcat.catcode
+		WHERE wa.memid=#{userid} and wa.status != ''
+	</select>
+
+    <select id="selectMyCourse"
+            parameterType="main.java.app.hgm.course.CourseExample"
+            resultType="main.java.app.hgm.course.CourseVO">
+		SELECT
+		  wa.*
+		  , DATE_FORMAT(wa.sdate, '%y.%m.%d') as sdate
+		  , DATE_FORMAT(wa.edate, '%y.%m.%d') as edate
+		  , wcat.purl , wc.leccode as lecode
+		FROM wiz_lecatt as wa
+		LEFT JOIN wiz_clrelation as wc on wa.leccode = wc.leccode
+	 	LEFT JOIN wiz_leccat as wcat on wc.catcode = wcat.catcode
+		WHERE wa.memid=#{userid} and wa.status != ''
+		ORDER BY wa.order_date DESC
+	</select>
+
+	<select id="countMyReserve"
+			parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="Integer">
+		select COUNT(*) from wiz_booked as wb left join wiz_lecture as wl on wb.leccode = wl.leccode
+		where wb.memid =#{userid}
+		order by idx desc
+	</select>
+
+	<select id="selectMyReserve"
+			parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="main.java.app.hgm.course.CourseVO">
+		select wl.lecname, wl.strprice, wb.bookno, DATE_FORMAT(wb.wdate, '%y.%m.%d') as wdate, DATE_FORMAT(wb.cdate, '%y.%m.%d') as cdate, wb.memid, wb.leccode, wb.reservation
+		from wiz_booked as wb left join wiz_lecture as wl on wb.leccode = wl.leccode
+		where wb.memid =#{userid}
+		order by idx desc
+	</select>
+
+	<select id="countMyGoods"
+			parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="Integer">
+		SELECT COUNT(*)
+		FROM wiz_lecatt as wa
+		LEFT JOIN wiz_clrelation as wc on wa.leccode = wc.leccode
+	 	LEFT JOIN wiz_leccat as wcat on wc.catcode = wcat.catcode
+		WHERE wa.memid=#{userid} and wa.status != ''
+		ORDER BY wa.order_date DESC
+	</select>
+
+	<select id="selectMyGoods"
+			parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="main.java.app.hgm.course.CourseVO">
+		SELECT
+		  wa.*
+		  , DATE_FORMAT(wa.sdate, '%y.%m.%d') as sdate
+		  , DATE_FORMAT(wa.edate, '%y.%m.%d') as edate
+		  , wcat.purl , wc.leccode as lecode
+		FROM wiz_lecatt as wa
+		LEFT JOIN wiz_clrelation as wc on wa.leccode = wc.leccode
+	 	LEFT JOIN wiz_leccat as wcat on wc.catcode = wcat.catcode
+		WHERE wa.memid=#{userid} and wa.status != ''
+		ORDER BY wa.order_date DESC
+	</select>
+
+	<select id="countMyTest"
+			parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="Integer">
+		SELECT COUNT(*)
+		FROM wiz_lecatt as wa
+		LEFT JOIN wiz_clrelation as wc on wa.leccode = wc.leccode
+	 	LEFT JOIN wiz_leccat as wcat on wc.catcode = wcat.catcode
+		WHERE wa.memid=#{userid} and wa.status != ''
+		ORDER BY wa.order_date DESC
+	</select>
+
+	<select id="selectMyTest"
+			parameterType="main.java.app.hgm.course.CourseExample"
+			resultType="main.java.app.hgm.course.CourseVO">
+		SELECT
+		  wa.*
+		  , DATE_FORMAT(wa.sdate, '%y.%m.%d') as sdate
+		  , DATE_FORMAT(wa.edate, '%y.%m.%d') as edate
+		  , wcat.purl , wc.leccode as lecode
+		FROM wiz_lecatt as wa
+		LEFT JOIN wiz_clrelation as wc on wa.leccode = wc.leccode
+	 	LEFT JOIN wiz_leccat as wcat on wc.catcode = wcat.catcode
+		WHERE wa.memid=#{userid} and wa.status != ''
+		ORDER BY wa.order_date DESC
+	</select>
+
+</mapper>
+

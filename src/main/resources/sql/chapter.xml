@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.app.hgm.chapter">
+
+
+	<select id="selectChapterOneOrd"
+		parameterType="main.java.app.hgm.chapter.ChapterVO"
+		resultType="main.java.app.hgm.chapter.ChapterVO">
+		SELECT ord FROM chapter WHERE coid = #{coid} AND ord =
+		#{ord}
+
+
+	</select>
+
+
+	<select id="selectChapterOne" parameterType="java.lang.Integer"
+		resultType="main.java.app.hgm.chapter.ChapterVO">
+		SELECT
+		ch.idx sn,
+		co.leccode coid,
+		ch.title AS chaptitle,
+		ch.mtype AS cotitle,
+		ch.idx ord,
+		ch.time runtime,
+		sample as prv,
+		ch.url
+		mp4url, upfile,upfile_name,html
+		FROM
+		wiz_lecmov AS ch
+		JOIN wiz_lecture AS
+		co
+		ON
+		ch.leccode = co.leccode
+		where ch.idx = #{sn}
+	</select>
+
+	<insert id="insertChapter"
+		parameterType="main.java.app.hgm.chapter.ChapterVO">
+		INSERT INTO chapter(
+		coid,
+		ord,
+		title,
+
+		runtime,
+		chpimg1,
+
+		prv,
+		mp4url,mp4url2,apikey
+		)
+		VALUES (
+		#{coid},
+		#{ord},
+		#{title},
+
+		#{runtime},
+		#{chpimg1},
+
+		#{prv},
+		#{mp4url},#{mp4url2},#{apikey}
+		)
+
+	</insert>
+
+	<insert id="insertUsercodeExcel"
+		parameterType="main.java.app.hgm.chapter.ChapterVO">
+		INSERT INTO usercode ( code1, code2, code3, codename ,
+		code )
+
+		VALUES (
+		#{code1}, #{code2}, #{code3}, #{codename}, #{code}
+		)
+
+	</insert>
+
+	<delete id="deleteChapter"
+		parameterType="main.java.app.hgm.chapter.ChapterVO">
+		delete from chapter where sn = #{sn}
+
+
+	</delete>
+
+	<update id="updateChapter"
+		parameterType="main.java.app.hgm.chapter.ChapterVO">
+		update chapter
+
+		<set>
+			<if test="coid != null">
+				coid = #{coid},
+			</if>
+			<if test="ord != null">
+				ord = #{ord},
+			</if>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="memo != null">
+				memo = #{memo},
+			</if>
+			<if test="runtime != null">
+				runtime = #{runtime},
+			</if>
+
+			<if test="chpimg1 != null">
+				chpimg1 = #{chpimg1},
+			</if>
+			<if test="chpimg2 != null">
+				chpimg2 = #{chpimg2},
+			</if>
+
+			<if test="prv != null">
+				prv = #{prv},
+			</if>
+			<if test="mp4url != null">
+				mp4url = #{mp4url},
+			</if>
+
+			<if test="mp4url2 != null">
+				mp4url2 = #{mp4url2},
+			</if>
+			<if test="apikey != null">
+				apikey = #{apikey},
+			</if>
+
+
+
+		</set>
+		where sn = #{sn,jdbcType=INTEGER}
+
+	</update>
+
+	<select id="selCourseTitle"
+		resultType="main.java.app.hgm.chapter.ChapterVO"
+		parameterType="java.lang.Integer">
+		SELECT leccode sn, lecname title FROM wiz_lecture WHERE leccode = #{sn}
+	</select>
+
+	<select id="selListCourse"
+
+		resultType="main.java.app.hgm.chapter.ChapterVO">
+		SELECT sn cosn,title cotitle FROM course
+	</select>
+
+	<select id="selListCourseHong"
+
+		resultType="main.java.app.hgm.chapter.ChapterVO">
+		SELECT leccode cosn,lecname cotitle FROM wiz_lecture
+	</select>
+	<select id="selListCourseHong2"
+
+		resultType="main.java.app.hgm.chapter.ChapterVO">
+		SELECT cosn, concat(lecname,' (',movcnt,' 강의)') cotitle
+		FROM (
+		SELECT leccode cosn,lecname ,
+		(SELECT COUNT(*) FROM wiz_lecmov WHERE wiz_lecmov.leccode =
+		wiz_lecture.leccode) movcnt
+		FROM wiz_lecture WHERE vtype != 'package' ) z
+	</select>
+
+
+	<select id="selListPkg2"
+
+		resultType="main.java.app.hgm.chapter.ChapterVO">
+		SELECT sn cosn,pkgtitle cotitle FROM package
+	</select>
+
+	<select id="selectAllChapter"
+		parameterType="main.java.app.hgm.chapter.ChapterExample"
+		resultType="main.java.app.hgm.chapter.ChapterVO">
+		SELECT
+		ch.idx sn,
+		co.leccode coid,
+		ch.title AS chaptitle,
+		ch.mtype AS
+		cotitle,
+		ch.idx ord,
+		ch.time runtime,
+		sample as prv,
+		ch.url mp4url,
+		upfile,upfile_name,html
+		FROM
+		wiz_lecmov AS ch
+		JOIN wiz_lecture AS co
+		ON
+		ch.leccode =
+		co.leccode
+		<if test="cosn != null and cosn !=''">
+			WHERE co.leccode = #{cosn}
+		</if>
+		ORDER BY ORD asc
+		<!--LIMIT ${rowStart-1}, 10-->
+	</select>
+	<select id="countAllChapter"
+		parameterType="main.java.app.hgm.chapter.ChapterExample"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM
+		wiz_lecmov AS ch
+		JOIN wiz_lecture AS co
+		ON ch.leccode
+		= co.leccode
+
+		<if test="cosn != null and cosn !=''">
+			WHERE co.leccode = #{cosn}
+		</if>
+
+	</select>
+</mapper>

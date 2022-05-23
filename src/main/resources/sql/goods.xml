@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main.java.app.hgm.product">
+
+	<select id="selLectureDetail" parameterType="String" resultType="main.java.app.hgm.product.ProductVO">
+		select
+			wp.leccode,
+			lecname,
+			teacheridx,
+            teacheridx2,
+            vtype,
+            pcode,
+            showset,
+            main_view,
+            term,
+			prior,
+			viewcnt,
+			deimgcnt,
+			basketcnt,
+			ordercnt,
+			cancelcnt,
+			sellprice,
+			conprice,
+			reserve,
+			strprice,
+			new,
+			best,
+			popular,
+			recom,
+			sale,
+			experi,
+			coupon_use,
+			coupon_dis,
+			coupon_type,
+			coupon_amount,
+			coupon_limit,
+			coupon_sdate,
+			coupon_edate,
+			lecicon,
+			prefer,
+			info_use,
+			info_name1,
+			info_value1,
+			info_name2,
+			info_value2,
+			info_name3,
+			info_value3,
+			info_name4,
+			info_value4,
+			info_name5,
+			info_value5,
+			info_name6,
+			info_value6,
+			lecimg_R,
+			lecimg_L1,
+			lecimg_M1,
+			lecimg_S1,
+			lecimg_L2,
+			lecimg_M2,
+			lecimg_S2,
+			lecimg_L3,
+			lecimg_M3,
+			lecimg_L4,
+			lecimg_M4,
+			lecimg_S4,
+			lecimg_L5,
+			lecimg_M5,
+			lecimg_S5,
+			searchkey,
+			stortexp,
+			content,
+			lec_book,
+			wdate,
+			mdate
+		From wiz_lecture wp left join wiz_clprelation wc  on wp.leccode = wc.leccode
+		where wp.leccode=#{leccode}
+	</select>
+
+	<select id="selChapterList" parameterType="String" resultType="main.java.app.hgm.chapter.ChapterVO">
+		SELECT
+		ch.idx sn,
+		co.leccode coid,
+		ch.title AS chaptitle,
+		ch.mtype AS cotitle,
+		ch.idx ord,
+		ch.time runtime,
+		sample as prv,
+		ch.url mp4url
+
+		FROM
+		wiz_lecmov AS ch
+		JOIN wiz_lecture AS co
+		ON
+		ch.leccode = co.leccode
+			WHERE co.leccode = #{leccode}
+			and ch.time > 0
+
+		ORDER BY ORD asc
+
+	</select>
+
+
+	<select id="countByReview"
+			parameterType="main.java.app.hgm.bbs.bbsExample"
+			resultType="java.lang.Integer">
+
+		select count(*) from wiz_bbs where code = #{code2} and leccode = #{leccode} and depno =0
+
+	</select>
+
+
+
+	<select id="selectByReview"
+			parameterType="main.java.app.hgm.bbs.bbsExample"
+			resultType="main.java.app.hgm.bbs.bbs">
+
+		SELECT
+		wiz_bbs.idx,prdcode,tidx,leccode,wiz_bbs.code,wiz_bbscat.catname,prino,
+		grpno,depno,star,memid,memgrp,name,email,subject,content
+		FROM wiz_bbs
+		LEFT OUTER JOIN wiz_bbscat ON wiz_bbs.code = wiz_bbscat.code
+
+		where
+		wiz_bbs.code = #{code2}
+		and wiz_bbs.leccode = #{leccode} and depno =0
+
+
+		ORDER BY idx desc
+		LIMIT ${rowStart-1}, 10;
+
+	</select>
+
+
+	<select id="selCartList"
+			parameterType="main.java.app.hgm.product.ProductExample" resultType="main.java.app.hgm.product.ProductVO">
+	SELECT wb.*, wp.del_type, wp.del_price FROM wiz_basket_tmp as wb left join wiz_product as wp on wb.prdcode = wp.prdcode WHERE wb.uniq_id=#{cartId} and gubun = #{gubun}
+	</select>
+
+	<select id="cartCheck" resultType="int">
+		SELECT COUNT(*) FROM wiz_basket_tmp WHERE uniq_id = #{uniq_id}
+
+	</select>
+
+
+	<insert id="insertCart" parameterType="main.java.app.hgm.product.ProductVO" >
+		insert into wiz_basket_tmp
+	</insert>
+
+	<!-- 로그인시 비회원장바구니 -> 회원장바구니 -->
+	<update id="cartUpdate">
+		UPDATE wiz_basket_tmp SET cart_mem_no = #{mem_no} WHERE CART_CKID = #{cart_ckid}
+	</update>
+
+</mapper>
+
+
+
+
+

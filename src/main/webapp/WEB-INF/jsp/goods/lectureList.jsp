@@ -6,26 +6,8 @@
 <script>
   $('.selectpicker').selectpicker();
 </script>
-<div class="bg-white inner-banner features">
-  <div class="container pad-container">
-    <div class="row col-md-12">
-      <h1>동영상 강의</h1>
-      <h3>홍지문 간호학원 출신 간호사 동강 화이팅!</h3>
-    </div>
-  </div>
-</div>
+
 <div class="bg-white">
-  <div class="col-md-12">
-    <form method="POST">
-      <select name="orderby" onchange="this.form.submit();">
-        <option value="">강의정렬방식</option>
-        <option value="viewcnt desc" <c:if test="${searchVO.oderby eq 'viewcnt desc'}">selected</c:if> >조회수 순</option>
-        <option value="leccode desc" <c:if test="${searchVO.oderby eq 'leccode desc'}">selected</c:if>>최근등록순 순</option>
-        <option value="sellprice asc" <c:if test="${searchVO.oderby eq 'sellprice asc'}">selected</c:if>>최저가격 순</option>
-        <option value="sellprice desc" <c:if test="${searchVO.oderby eq 'sellprice desc'}">selected</c:if>>최고가격 순</option>
-      </select>
-    </form>
-  </div>
   <div class="container pad-container">
     <!-- projects filter -->
     <div class="filter">
@@ -40,14 +22,24 @@
       <a href="#" class="filter" data-filter=".photography">취업 자격증</a>
     </div>
     <!-- /projects filter -->
-
+    <div class="container" style="width:200px;margin:0 0 0 auto">
+      <form method="POST">
+        <select name="orderby" onchange="this.form.submit();">
+          <option value="">강의정렬방식</option>
+          <option value="viewcnt desc" <c:if test="${searchVO.oderby eq 'viewcnt desc'}">selected</c:if> >조회수 순</option>
+          <option value="leccode desc" <c:if test="${searchVO.oderby eq 'leccode desc'}">selected</c:if>>최근등록순 순</option>
+          <option value="sellprice asc" <c:if test="${searchVO.oderby eq 'sellprice asc'}">selected</c:if>>최저가격 순</option>
+          <option value="sellprice desc" <c:if test="${searchVO.oderby eq 'sellprice desc'}">selected</c:if>>최고가격 순</option>
+        </select>
+      </form>
+    </div>
     <!-- projects grid -->
     <ul class="projects-grid project-grid-gut hover-white" id="project-grid">
 
       <c:forEach var="list" items="${courseList}">
 
         <li class="project-item mix photography">
-          <a href="images/content/portfolio/full-project-1.jpg" class="fancybox" data-rel="portfolio" data-title-id="img-01">
+          <a href="/goods/detail?leccode=${list.leccode}" class="fancybox" data-rel="portfolio" data-title-id="img-01">
             <div class="project-img">
               <img class="project-img" src="http://www.nurse-edu.co.kr/admin/data/lecimg/${list.lecimg_R}" alt="project" />
             </div>

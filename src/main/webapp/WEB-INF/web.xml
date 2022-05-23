@@ -61,4 +61,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
             130
         </session-timeout>
     </session-config>
+
+    <resource-ref>
+        <description>hoingji db</description>
+        <res-ref-name>jdbc/root</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+
+    </resource-ref>
 </web-app>

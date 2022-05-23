@@ -80,8 +80,8 @@
                 
                 <script>
                 function login(){
-                	if ( document.loginform.userid.value == '' || document.loginform.userpw.value == '' ) {alert("아이디/비번을 입력해 주세요.");}else{
-                	    var frm = $("form[name='loginform']");
+                    if ( document.loginform.userid.value == '' || document.loginform.userpw.value == '' ) {alert("아이디/비번을 입력해 주세요.");}else{
+                        var frm = $("form[name='loginform']");
                         $.ajax({
                             type: "POST",
                             url: "/admin/login",
@@ -109,8 +109,8 @@
                                 return false;
                             }
                         });
-                	}
-                	
+                    }
+
                 }
                 
                 </script>

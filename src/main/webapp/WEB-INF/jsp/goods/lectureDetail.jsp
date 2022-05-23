@@ -2,18 +2,11 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <jsp:include page="/WEB-INF/jsp/layout/header.jsp" />
-<script>
-  $('.selectpicker').selectpicker();
-</script>
-<div class="bg-white inner-banner features">
-  <div class="container pad-container">
-    <div class="row col-md-12">
-      <h1>동영상 강의</h1>
-      <h3>홍지문 간호학원 출신 간호사 동강 화이팅!</h3>
-    </div>
-  </div>
-</div>
+
+
 <div class="bg-white">
   <div class="col-md-12">
     <!-- Product section -->
@@ -26,27 +19,33 @@
 
             <div class="owl-slider-wrapper">
               <div class="owl-portfolio-slider">
-                <div class="item"> <img src="images/content/products/product-slide-1.jpg" alt="" /> </div>
-                <div class="item"> <img src="images/content/products/product-slide-2.jpg" alt="" /> </div>
+                <div class="item"> <img src="http://www.nurse-edu.co.kr/admin/data/lecimg/${pvo.lecimg_L1}" alt="" /> </div>
+                <div class="item"> <img src="http://www.nurse-edu.co.kr/admin/data/lecimg/${pvo.lecimg_R}" alt="" /> </div>
               </div>
               <div class="owl-custom-nav"> <a class="slider-prev"></a> <a class="slider-next"></a> </div>
             </div>
 
           </div>
 
-          <div class="col-sm-6 l-pad30 product-details">
+          <div class="col-sm-6 l-pad30 product-details t-mgr20">
+            <h2> ${pvo.lecname}</h2>
+            <c:if test="${pvo.info_value1 ne ''}">
+            <div class="info">${pvo.info_name1} : ${pvo.info_value1}</div>
+            </c:if>
+            <c:if test="${pvo.info_value2 ne ''}">
+              <div class="info">${pvo.info_name2} : ${pvo.info_value2}</div>
+            </c:if>
+            <c:if test="${pvo.info_value3 ne ''}">
+              <div class="info">${pvo.info_name3} : ${pvo.info_value3}</div>
+            </c:if>
 
-            <h1> T-Shirt Casual Wear<span><a href="#">3 reviews</a></span></h1>
-            <div class="rating">
-              <i class="icon-star-1"></i>
-              <i class="icon-star-1"></i>
-              <i class="icon-star-1"></i>
-              <i class="icon-star-1"></i>
-              <i class="icon-star-empty-1"></i>
+
+            <div class="price">
+              <span class="after"><fmt:formatNumber value="${pvo.sellprice}" />원</span>
+              <c:if test="${pvo.sellprice ne pvo.conprice }">
+              <span class="before"><fmt:formatNumber value="${pvo.conprice}" /></span>
+              </c:if>
             </div>
-            <div class="price">$49</div>
-            <p> Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. </p>
-            <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Morbi in semper mauris. Nulla convallis pharetra felis, a ultrices massa tristique in. Phasellus purus sem, porttitor eget luctus sed, congue et purus. Integer sagittis augue a consequat ultrices.</p>
             <form enctype="multipart/form-data" method="post" class="cart t-mgr30">
               <div class="quantity">
                 <input type="button" class="minus" value="-">
@@ -56,105 +55,80 @@
             </form>
             <div class="clearfix"></div>
 
-            <a href="#" class="btn">Add to cart </a>
-
+            <a href="#" class="btn" id="onCart">구매하기 </a>
           </div>
 
         </div>
 
         <div class="sep60"></div>
 
-        <div class="tabs tabs-top left tab-container">
+        <div class="tabs tabs-top left tab-container" style="width:100%">
 
           <ul class="etabs">
-            <li class="tab"><a href="#tab-1">Product Description</a></li>
-            <li class="tab"><a href="#tab-2">Additional Information</a></li>
-            <li class="tab"><a href="#tab-3">Reviews (3)</a></li>
+            <li class="tab"><a href="#tab-1">강좌소개</a></li>
+            <li class="tab"><a href="#tab-2">강좌목록</a></li>
+            <li class="tab"><a href="#tab-3">교재설명</a></li>
+            <li class="tab"><a href="#tab-4">수강후기</a></li>
           </ul>
 
           <div class="panel-container t-mgr10" style="border:1px solid #e5e5e5; padding:10px 20px; border-radius:2px;" >
 
             <div class="tab-block" id="tab-1">
-              <p>Duis sit amet fermentum magna. Ut eget sem eget nunc blandit fermentum a non lectus. Phasellus cursus sapien at arcu feugiat, non commodo erat facilisis. Curabitur ac enim lobortis, tempor nisl sed, convallis dolor. </p>
-              <p> Maecenas quis aliquet ipsum. Donec vel tempor arcu, eu faucibus sapien. Praesent velit lacus, vulputate eget placerat quis, hendrerit nec leo.</p>
-              <p>Etiam convallis, felis quis dapibus dictum, libero mauris luctus nunc, non fringilla purus ligula non justo. Nullam elementum consequat lacus, sit amet pulvinar urna hendrerit sit amet. Sed aliquam eu ante a ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce elementum felis lorem, eget scelerisque enim blandit quis. Praesent luctus pulvinar sollicitudin. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
-
+              ${pvo.content}
             </div>
 
             <div class="tab-block" id="tab-2">
-              <div class="container">
-                <table class="standard-table" style="width:100%;">
-                  <tr>
-                    <th>Product</th>
-                    <th>Description</th>
-                  </tr>
-                  <tr>
-                    <td>Size</td>
-                    <td>Large</td>
+              <div class="container" >
 
-                  </tr>
-                  <tr>
-                    <td>Color</td>
-                    <td>Red</td>
-                  </tr>
-                  <tr>
-                    <td>Material</td>
-                    <td>Jersey</td>
-                  </tr>
-                </table>
+
+                    <table class="standard-table col-sm-7">
+                      <tr><th>번호</th><th>제목</th><th>시간</th></tr>
+
+                      <c:forEach var="list" items="${clist}" varStatus="status">
+                        <tr>
+                          <td>${status.index + 1}</td>
+                          <td>${list.chaptitle}</td>
+                          <td>${list.runtime}</td>
+                        </tr>
+                      </c:forEach>
+                    </table>
+
               </div>
             </div>
 
             <div class="tab-block" id="tab-3">
               <div class="container">
                 <section class="comments-sec">
-                  <ol class="commentlist">
-
-                    <li>
-                      <div class="avatar"><img src="images/content/happy-clients-01.jpg" alt="" /> </div>
-                      <div class="comment-des">
-                        <h4 class="fw600">Jessica lyon</h4>
-                        <p class="date">Jan 1st, 2015 03:15 PM - <a href="#">Reply</a></p>
-                        <p>In lacinia aliquet est et luctus. Sed et hendrerit tortor. Ut id aliquam arcu. Nam a mauris porta, pharetra justo sit amet, vestibulum justo.</p>
-                      </div>
-                      <div class="clearfix"></div>
-                      <ol class="childlist">
-                        <li>
-                          <div class="avatar"><img src="images/content/happy-clients-02.jpg" alt="" /> </div>
-                          <div class="comment-des">
-                            <h4  class="fw600">Tom Richard</h4>
-                            <p class="date">Jan 1st, 2015 03:15 PM - <a href="#">Reply</a></p>
-                            <p>In lacinia aliquet est et luctus. Sed et hendrerit tortor. Ut id aliquam arcu. Nam a mauris porta, pharetra justo sit amet, vestibulum justo.</p>
-                          </div>
-                          <div class="clearfix"></div>
-                        </li>
-                      </ol>
-                    </li>
-
-                    <li>
-                      <div class="avatar"><img src="images/content/happy-clients-01.jpg" alt="" /> </div>
-                      <div class="comment-des">
-                        <h4 class="fw600">Jessica lyon</h4>
-                        <p class="date">Jan 1st, 2015 03:15 PM - <a href="#">Reply</a></p>
-                        <p>In lacinia aliquet est et luctus. Sed et hendrerit tortor. Ut id aliquam arcu. Nam a mauris porta, pharetra justo sit amet, vestibulum justo.</p>
-                      </div>
-                      <div class="clearfix"></div>
-                    </li>
-
-                    <li>
-                      <div class="avatar"><img src="images/content/happy-clients-03.jpg" alt="" /> </div>
-                      <div class="comment-des">
-                        <h4 class="fw600">Peter Johns</h4>
-                        <p class="date">Jan 1st, 2015 03:15 PM - <a href="#">Reply</a></p>
-                        <p>In lacinia aliquet est et luctus. Sed et hendrerit tortor. Ut id aliquam arcu. Nam a mauris porta, pharetra justo sit amet, vestibulum justo.</p>
-                      </div>
-                    </li>
-
-                  </ol>
+                  ${pvo.lec_book}
                 </section>
               </div>
             </div>
+            <div class="tab-block" id="tab-4">
+              <div class="container">
 
+
+                  <table class="standard-table">
+                    <tr><th>번호</th><th>제목</th><th>별점</th><th>작성자</th><th>작성</th></tr>
+                    <c:if test="${fn:length(rvlist) == 0}">
+                      <tr>
+                        <td colspan="5">리뷰가 없습니다.</td>
+                      </tr>
+                    </c:if>
+
+                    <c:forEach var="rlist" items="${rvlist}" varStatus="status">
+                      <tr>
+                        <td>${status.index + 1}</td>
+                        <td>${rlist.subject}</td>
+                        <td>${rlist.star}</td>
+                        <td>${rlist.name}</td>
+                        <td>${rlist.wdate}</td>
+                      </tr>
+                    </c:forEach>
+
+                  </table>
+
+              </div>
+            </div>
           </div>
 
         </div>
@@ -162,9 +136,9 @@
         <div class="clearfix"></div>
         <div class="sep60"></div>
 
-        <h3 class="title-left">Related Products</h3>
+        <h3 class="title-left" style="display: none;">관련상품</h3>
 
-        <div class="product-grid col4">
+        <div class="product-grid col4"  style="display:none">
 
           <!-- product -->
           <article class="post brd0">
@@ -244,3 +218,32 @@
 </div>
 
 <jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />
+<script>
+
+    $(function(){
+        $("#onCart").on("click",function () {
+            alert('1');
+        })
+
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {
+                $('#topmove-btn').fadeIn();
+            } else {
+                $('#topmove-btn').fadeOut();
+            }
+        });
+
+        $("#topmove-btn").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+
+    });
+
+</script>
+
+<span id="btnTop">
+    <div id="topmove-btn"><img src="/assets/scroll-top_click_mo.svg"></div>
+</span>
