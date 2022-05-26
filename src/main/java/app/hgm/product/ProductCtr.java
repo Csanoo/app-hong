@@ -92,13 +92,6 @@ public class ProductCtr {
 			productSvc.cartInsert(cartVO);
 
 			//회원 장바구니 상품추가
-		} else if(session.getAttribute("member") != null){
-			MemberVO memberVO = (MemberVO) session.getAttribute("USERID");
-			cartVO.setCart_mem_no(memberVO.getIdx());
-			if(productSvc.cartMemCheck(cartVO) != 0) {
-				return 2;
-			}
-			productSvc.cartInsert(cartVO);
 		}
 		return 1;
 	}

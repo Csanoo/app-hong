@@ -72,17 +72,11 @@ public class ProductSvc implements ProductMapper {
 		return 0;
 	}
 
-
-
-
-
 	@Override
 	public ProductVO selectByPrimaryKey(Integer sn) {
 		return sqlSession.selectOne("", sn);
 		
 	}
-
-	
 
 	@Override
 	public int deleteByExample(ProductExample example) {

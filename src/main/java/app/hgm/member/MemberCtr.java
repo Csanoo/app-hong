@@ -18,7 +18,7 @@ import java.util.Map;
 import main.java.app.hgm.course.CourseVO;
 import main.java.app.hgm.course.CourseExample;
 import org.springframework.web.util.WebUtils;
-
+import main.java.app.hgm.product.ProductSvc;
 
 @Controller
 public class MemberCtr {
@@ -27,7 +27,7 @@ public class MemberCtr {
 	private MemberSvc memberSvc;
 
 	@Autowired
-	private ProductVO productVO;
+	private ProductSvc productSvc;
 
 	@RequestMapping(value = "/join")
 	public String MainRegist1(HttpServletRequest request, SearchVO searchVO, ModelMap modelMap, HttpSession session) {
@@ -102,20 +102,7 @@ public class MemberCtr {
 			session.setAttribute("USERNAME", memberVO.getName());
 			session.setAttribute("USERID", memberVO.getId());
 			// 비회원 장바구니 회원장바구니로 이동
-			Cookie cookie = WebUtils.getCookie(request, "cartCookie");
 
-			if (cookie != null) {
-				String ckValue = cookie.getValue();
-				System.out.println("비회원장바구니 삭제");
-//쿠키에 담긴 정보에 회원NO 입력
-
-				productVO.cartUpdate(memberVO.getId(), ckValue);
-//쿠키삭제
-				cookie.setPath("/");
-				cookie.setMaxAge(0);
-
-				response.addCookie(cookie);
-			}
 
 			result="TRUE";
 		}

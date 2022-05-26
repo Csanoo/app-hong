@@ -46,7 +46,8 @@
               <span class="before"><fmt:formatNumber value="${pvo.conprice}" /></span>
               </c:if>
             </div>
-            <form enctype="multipart/form-data" method="post" class="cart t-mgr30">
+            <form enctype="multipart/form-data" method="post" class="cart t-mgr30" id="frmCart">
+              <input type="hidden" value="${pvo.prdcode}" name="prdcode">
               <div class="quantity">
                 <input type="button" class="minus" value="-">
                 <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity">
@@ -222,8 +223,30 @@
 
     $(function(){
         $("#onCart").on("click",function () {
-            alert('1');
-        })
+          var $prdcode = $("#prdcode").val();
+          console.log($prdcode);
+          $.ajax({
+            type : "POST",
+            url : "/cart",
+            dataType : "json",
+            data : {'prdcode' : $prdcode},
+            error : function(request,status, error) {
+              console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            },
+            success : function(data) {
+              if (data == 1) {
+                cartHeaderView();
+                toastr.options.preventDuplicates = true;
+
+                toastr.success("장바구니 추가완료");
+              } else if (data == 2) {
+                toastr.options.preventDuplicates = true;
+                toastr.warning("이미 추가 된 상품입니다");
+              }
+
+            }
+          });
+        });
 
         $(window).scroll(function() {
             if ($(this).scrollTop() > 500) {
@@ -241,7 +264,6 @@
         });
 
     });
-
 </script>
 
 <span id="btnTop">

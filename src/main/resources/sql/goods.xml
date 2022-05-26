@@ -144,7 +144,8 @@
 
 
 	<insert id="insertCart" parameterType="main.java.app.hgm.product.ProductVO" >
-		insert into wiz_basket_tmp
+		insert into wiz_basket_tmp (uniq_id, prdcode, prdname, prdimg, prdprice, prdreserve, amount, wdate)
+		select #{uniq_id}, prdcode, prdname, prdimg_R, sellprice, reserve, '1', now()  from wiz_product where prdcode= #{prdcode};
 	</insert>
 
 	<!-- 로그인시 비회원장바구니 -> 회원장바구니 -->
