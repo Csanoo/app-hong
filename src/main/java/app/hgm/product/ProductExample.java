@@ -8,7 +8,17 @@ import java.util.List;
 import main.java.edumgt.common.util.PageVO;
 
 public class ProductExample extends PageVO {
-	
+
+	private String leccode;
+
+	public String getLeccode() {
+		return leccode;
+	}
+
+	public void setLeccode(String leccode) {
+		this.leccode = leccode;
+	}
+
 	private String catcode;
 	public String getCatcode() {
 		return catcode;

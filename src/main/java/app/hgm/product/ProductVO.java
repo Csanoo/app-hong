@@ -1186,6 +1186,12 @@ public class ProductVO {
 		this.memo2 = memo2 == null ? null : memo2.trim();
 	}
 
+	private String leccode;
+
+	public String getLeccode() {
+		return leccode;
+	}
+
 	private String lecname;
 
 	public String getLecname() {

@@ -55,21 +55,34 @@ public class ProductSvc implements ProductMapper {
 		
 	}
 
+	public List<ProductVO> selCartList(ProductVO productVO) {
+		return sqlSession.selectList("selCartList", productVO);
+	}
 
-	public List<ProductVO> selCartList(ProductExample example) {
-		return sqlSession.selectList("selectByExampleProduct", example);
+	public List<ProductVO> selOrderList(ProductVO productVO) {
+		return sqlSession.selectList("selOrderList", productVO);
 	}
 
 
 	public int cartInsert(ProductVO cartvo) {
-		sqlSession.insert("insertCart",cartvo);
+		String type = cartvo.getPrdtype();
+		if(type.equals("L")){
+			sqlSession.insert("insertCartL",cartvo);
+		}else{
+			sqlSession.insert("insertCart",cartvo);
+		}
+
 		return 0;
 	}
 
+	public int orderInsert(ProductVO cartvo) {
+		sqlSession.insert("insertCheckout",cartvo);
+		return 1;
+	}
 
 	public int cartCheck(ProductVO cartvo) {
-		sqlSession.insert("insertCart",cartvo);
-		return 0;
+		return sqlSession.selectOne("cartCheck", cartvo);
+
 	}
 
 	@Override

@@ -17,6 +17,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -48,13 +51,14 @@ public class ProductCtr {
 	}
 
 	@RequestMapping(value = "/order/cart")
-	public String basketList(ProductExample example, ModelMap modelMap) {
-
-
-		List<?> listview = productSvc.selCartList(example);
+	public String basketList(ProductVO cartVO, ModelMap modelMap,HttpServletRequest request) {
+		Cookie cookie = WebUtils.getCookie(request, "cartCookie");
+		String ckValue = cookie.getValue();
+		cartVO.setUniq_id(ckValue);
+		List<?> listview = productSvc.selCartList(cartVO);
 
 		modelMap.addAttribute("listview", listview);
-		modelMap.addAttribute("searchVO", example);
+		modelMap.addAttribute("cartVO", cartVO);
 		return "goods/cart";
 	}
 
@@ -66,20 +70,24 @@ public class ProductCtr {
 		Cookie cookie = WebUtils.getCookie(request, "cartCookie");
 
 		//비회원장바구니 첫 클릭시 쿠키생성
-		if (cookie == null && session.getAttribute("member") == null) {
+		if (cookie == null ) {
 			String ckid = RandomStringUtils.random(6, true, true);
 			Cookie cartCookie = new Cookie("cartCookie", ckid);
 			cartCookie.setPath("/");
 			cartCookie.setMaxAge(60 * 60 * 24 * 1);
 			response.addCookie(cartCookie);
-			cartVO.getCartId(ckid);
+			//cartVO.getCartId(ckid);
+			cartVO.setUniq_id(ckid);
+			cartVO.setPrdtype("L");
+			cartVO.setPrdcode(request.getParameter("prdCode"));
 			this.productSvc.cartInsert(cartVO);
 
 			//비회원 장바구니 쿠키생성 후 상품추가
-		} else if (cookie != null && session.getAttribute("member") == null) {
+		} else if (cookie != null ) {
 
 			String ckValue = cookie.getValue();
 			cartVO.setUniq_id(ckValue);
+			cartVO.setPrdtype("L");
 			//장바구니 중복제한
 			if(productSvc.cartCheck(cartVO) != 0) {
 				return 2;
@@ -97,27 +105,47 @@ public class ProductCtr {
 	}
 
 
+	//장바구니
+	@ResponseBody
+	@RequestMapping(value = {"/order"}, method = {RequestMethod.POST})
+	public String order(HttpSession session, HttpServletRequest request, HttpServletResponse response, ProductVO cartVO) throws Exception {
+		Cookie cookie = WebUtils.getCookie(request, "cartCookie");
+		String uniq_id = cookie.getValue();
+		cartVO.setUniq_id(uniq_id);
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date date = new Date();
+		String strDt = dateFormat.format(date);
+		String oid = strDt+uniq_id;
+		return oid;
+	}
+
+	@RequestMapping(value = "/order/settle")
+	public String settle(ProductVO cartVO, ModelMap modelMap,HttpServletRequest request) {
+		String order_id = request.getParameter("order_id");
+		String uniq_id = request.getParameter("uniq_id");
+		cartVO.setOrderid(order_id);
+		cartVO.setUniq_id(uniq_id);
+		List<?> listview = productSvc.selOrderList(cartVO);
+
+		modelMap.addAttribute("listview", listview);
+		modelMap.addAttribute("cartVO", cartVO);
+		return "goods/settle";
+	}
+
+
 	@RequestMapping(value = "/lecture/detail")
 	public String productRead(HttpServletRequest request, ProductVO faqinfo, ModelMap modelMap) {
-
 		String sn = request.getParameter("leccode");
-
 		faqinfo = productSvc.selectlecDetail(sn);
-
 		modelMap.addAttribute("faqinfo", faqinfo);
-
 		return "goods/lecturedetail";
 	}
 	
 	@RequestMapping(value = "/basketOne")
 	public String basketOne(HttpServletRequest request, ProductVO faqinfo, ModelMap modelMap) {
-
 		String sn = request.getParameter("sn");
-
 		faqinfo = productSvc.selBookSellOne(sn);
-
 		modelMap.addAttribute("faqinfo", faqinfo);
-
 		return "product/form2";
 	}
 

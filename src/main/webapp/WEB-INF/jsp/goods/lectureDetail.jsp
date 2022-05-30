@@ -47,7 +47,7 @@
               </c:if>
             </div>
             <form enctype="multipart/form-data" method="post" class="cart t-mgr30" id="frmCart">
-              <input type="hidden" value="${pvo.prdcode}" name="prdcode">
+              <input type="hidden" value="${pvo.leccode}" name="prdcode" id="prdcode">
               <div class="quantity">
                 <input type="button" class="minus" value="-">
                 <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity">
@@ -56,7 +56,7 @@
             </form>
             <div class="clearfix"></div>
 
-            <a href="#" class="btn" id="onCart">구매하기 </a>
+            <a class="btn" id="onCart">구매하기 </a>
           </div>
 
         </div>
@@ -234,10 +234,10 @@
               console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
             success : function(data) {
+              console.log(data);
               if (data == 1) {
-                cartHeaderView();
+               // cartHeaderView();
                 toastr.options.preventDuplicates = true;
-
                 toastr.success("장바구니 추가완료");
               } else if (data == 2) {
                 toastr.options.preventDuplicates = true;

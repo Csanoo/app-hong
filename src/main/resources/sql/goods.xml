@@ -133,13 +133,12 @@
 
 
 	<select id="selCartList"
-			parameterType="main.java.app.hgm.product.ProductExample" resultType="main.java.app.hgm.product.ProductVO">
-	SELECT wb.*, wp.del_type, wp.del_price FROM wiz_basket_tmp as wb left join wiz_product as wp on wb.prdcode = wp.prdcode WHERE wb.uniq_id=#{cartId} and gubun = #{gubun}
+			parameterType="main.java.app.hgm.product.ProductVO" resultType="main.java.app.hgm.product.ProductVO">
+	SELECT wb.*, wp.del_type, wp.del_price FROM wiz_basket_tmp as wb left join wiz_product as wp on wb.prdcode = wp.prdcode WHERE wb.uniq_id=#{uniq_id}
 	</select>
 
-	<select id="cartCheck" resultType="int">
-		SELECT COUNT(*) FROM wiz_basket_tmp WHERE uniq_id = #{uniq_id}
-
+	<select id="cartCheck" resultType="int" parameterType="main.java.app.hgm.product.ProductVO">
+		SELECT COUNT(*) FROM wiz_basket_tmp WHERE uniq_id = #{uniq_id} and prdcode = #{prdcode}
 	</select>
 
 
@@ -148,11 +147,15 @@
 		select #{uniq_id}, prdcode, prdname, prdimg_R, sellprice, reserve, '1', now()  from wiz_product where prdcode= #{prdcode};
 	</insert>
 
-	<!-- 로그인시 비회원장바구니 -> 회원장바구니 -->
-	<update id="cartUpdate">
-		UPDATE wiz_basket_tmp SET cart_mem_no = #{mem_no} WHERE CART_CKID = #{cart_ckid}
-	</update>
+	<insert id="insertCartL" parameterType="main.java.app.hgm.product.ProductVO" >
+		insert into wiz_basket_tmp (uniq_id, prdcode, prdname, prdimg, prdprice, prdreserve, amount, wdate)
+		SELECT  #{uniq_id},leccode, lecname, lecimg_R, sellprice, reserve, '1', now() FROM wiz_lecture where leccode= #{prdcode};
+	</insert>
 
+	<insert id="insertCheckout" parameterType="main.java.app.hgm.product.ProductVO" >
+		insert into wiz_basket (uniq_id, prdcode, prdname, prdimg, prdprice, prdreserve, amount, wdate)
+		SELECT  #{uniq_id},leccode, lecname, lecimg_R, sellprice, reserve, amount, now() FROM wiz_basket_temp where uniq_id= #{uniq_id};
+	</insert>
 </mapper>
 
 
