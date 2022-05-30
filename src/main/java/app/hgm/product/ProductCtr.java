@@ -50,6 +50,22 @@ public class ProductCtr {
 		return "goods/lectureDetail";
 	}
 
+	@RequestMapping(value = "/goods/detailp")
+	public String prdDetail(HttpServletRequest request,ProductVO productVO, ModelMap modelMap, HttpSession session, bbsExample bExample) {
+		String leccode = request.getParameter("leccode");
+		productVO = productSvc.selectlecDetail(leccode);
+		modelMap.addAttribute("pvo", productVO);
+		List<ChapterVO> chapterVOList = productSvc.selChapterList(leccode);
+		modelMap.addAttribute("clist",chapterVOList);
+		bExample.setCode2("review");
+		bExample.setLeccode(leccode);
+
+		bExample.pageCalculate( bbsSvc.countByReview(bExample) );
+		List<bbs> rvList = bbsSvc.selectByReview(bExample);
+		modelMap.addAttribute("rvlist",rvList);
+		return "goods/prdDetail";
+	}
+
 	@RequestMapping(value = "/order/cart")
 	public String basketList(ProductVO cartVO, ModelMap modelMap,HttpServletRequest request) {
 		Cookie cookie = WebUtils.getCookie(request, "cartCookie");

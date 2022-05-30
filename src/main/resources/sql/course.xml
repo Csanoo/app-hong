@@ -20,7 +20,7 @@
 			resultType="main.java.app.hgm.course.CourseVO">
 		SELECT  distinct wp.leccode,wp.teacheridx,wp.teacheridx2, wp.lecname, wp.stortexp, wp.reserve, wp.sellprice, wp.strprice, wp.lecimg_R, wp.popular, wp.recom, wp.new as newc, wp.best, wp.sale, wp.lecicon,
 						 wp.conprice, wp.coupon_use, wp.coupon_type, wp.coupon_dis, wp.coupon_amount, wp.coupon_limit, wp.coupon_edate,
-						 wp.term, wp.info_name1, wp.info_value1, wp.info_name2, wp.info_value2, wp.viewcnt
+						 wp.term, wp.info_name1, wp.info_value1, wp.info_name2, wp.info_value2, wp.viewcnt, wc.catcode
 		FROM wiz_clrelation wc, wiz_lecture wp, wiz_leccat wy
 		WHERE
 			wy.catuse != 'N'
@@ -51,7 +51,7 @@
 			resultType="main.java.app.hgm.course.CourseVO">
 		SELECT distinct wc.catcode, wp.prdcode, wp.prdname, wp.stortexp, wp.prdcom, wp.reserve, wp.sellprice, wp.strprice, wp.prdimg_R
 		, wp.popular, wp.recom, wp.new as newc, wp.best, wp.sale, wp.shortage, wp.prdicon, wp.stock
-		,wp.conprice, wp.coupon_use, wp.coupon_type, wp.coupon_dis, wp.coupon_amount, wp.coupon_limit, wp.coupon_edate
+		,wp.conprice, wp.coupon_use, wp.coupon_type, wp.coupon_dis, wp.coupon_amount, wp.coupon_limit, wp.coupon_edate, wc.catcode
 		from wiz_cprelation wc, wiz_product wp, wiz_category wy
 		<where>
 			wy.catuse != 'N' and wc.catcode = wy.catcode and wc.prdcode = wp.prdcode and wp.showset != 'N' and left(wc.catcode, 2) = '12'
@@ -78,7 +78,7 @@
 			resultType="main.java.app.hgm.course.CourseVO">
 		SELECT distinct wc.catcode, wp.prdcode, wp.prdname, wp.stortexp, wp.prdcom, wp.reserve, wp.sellprice, wp.strprice, wp.prdimg_R
 		, wp.popular, wp.recom, wp.new as newc, wp.best, wp.sale, wp.shortage, wp.prdicon, wp.stock
-		,wp.conprice, wp.coupon_use, wp.coupon_type, wp.coupon_dis, wp.coupon_amount, wp.coupon_limit, wp.coupon_edate
+		,wp.conprice, wp.coupon_use, wp.coupon_type, wp.coupon_dis, wp.coupon_amount, wp.coupon_limit, wp.coupon_edate, wc.catcode
 		from wiz_cprelation wc, wiz_product wp, wiz_category wy
 		<where>
 			wy.catuse != 'N' and wc.catcode = wy.catcode and wc.prdcode = wp.prdcode and wp.showset != 'N' and (left(wc.catcode, 2) = '13' or left(wc.catcode, 2) = '10' or left(wc.catcode, 2) = '11' )

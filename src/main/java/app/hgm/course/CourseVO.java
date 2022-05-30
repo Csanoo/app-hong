@@ -338,6 +338,8 @@ public class CourseVO {
 		this.catname = catname;
 	}
 
+	private String catcode;
+
 	public String getCatcode() {
 		return catcode;
 	}
@@ -345,8 +347,6 @@ public class CourseVO {
 	public void setCatcode(String catcode) {
 		this.catcode = catcode;
 	}
-
-	private String catcode;
 
 	private String status;
 
@@ -1501,6 +1501,17 @@ public class CourseVO {
 	public void setPrdimg_R(String prdimg_R) {
 		this.prdimg_R = prdimg_R;
 	}
+
+	private String prdcode;
+
+	public String getPrdcode() {
+		return prdcode;
+	}
+
+	public void setPrdcode(String prdcode) {
+		this.prdcode = prdcode;
+	}
+
 
 
 }

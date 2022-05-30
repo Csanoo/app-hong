@@ -52,7 +52,7 @@ public class CourseCtr {
 		modelMap.addAttribute("courseList", courseList);
 		modelMap.addAttribute("searchVO", courseExample);
 
-		return "goods/affixlist";
+		return "goods/affixList";
 
 	}
 
