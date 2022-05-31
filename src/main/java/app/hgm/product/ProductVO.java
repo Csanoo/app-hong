@@ -728,6 +728,20 @@ public class ProductVO {
 	private String content;
 	private String wdate;
 
+	private String gubun;
+
+	public String getGubun() {
+		return gubun;
+	}
+
+	public void setGubun(String gubun) {
+		this.gubun = gubun;
+	}
+
+	public void setLeccode(String leccode) {
+		this.leccode = leccode;
+	}
+
 	private String ordno;
 
 	private String imgfile;

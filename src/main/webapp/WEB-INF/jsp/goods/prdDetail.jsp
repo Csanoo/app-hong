@@ -19,8 +19,8 @@
 
             <div class="owl-slider-wrapper">
               <div class="owl-portfolio-slider">
-                <div class="item"> <img src="http://www.nurse-edu.co.kr/admin/data/lecimg/${pvo.lecimg_L1}" alt="" /> </div>
-                <div class="item"> <img src="http://www.nurse-edu.co.kr/admin/data/lecimg/${pvo.lecimg_R}" alt="" /> </div>
+                <div class="item"> <img src="http://www.nurse-edu.co.kr/admin/data/prdimg/${pvo.prdimg_l1}" alt="" /> </div>
+                <div class="item"> <img src="http://www.nurse-edu.co.kr/admin/data/prdimg/${pvo.prdimg_r}" alt="" /> </div>
               </div>
               <div class="owl-custom-nav"> <a class="slider-prev"></a> <a class="slider-next"></a> </div>
             </div>
@@ -28,7 +28,7 @@
           </div>
 
           <div class="col-sm-6 l-pad30 product-details t-mgr20">
-            <h2> ${pvo.lecname}</h2>
+            <h2> ${pvo.prdname}</h2>
             <c:if test="${pvo.info_value1 ne ''}">
             <div class="info">${pvo.info_name1} : ${pvo.info_value1}</div>
             </c:if>
@@ -47,7 +47,7 @@
               </c:if>
             </div>
             <form enctype="multipart/form-data" method="post" class="cart t-mgr30" id="frmCart">
-              <input type="hidden" value="${pvo.leccode}" name="prdcode" id="prdcode">
+              <input type="hidden" value="${pvo.prdcode}" name="prdcode" id="prdcode">
               <div class="quantity">
                 <input type="button" class="minus" value="-">
                 <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity">
@@ -66,10 +66,8 @@
         <div class="tabs tabs-top left tab-container" style="width:100%">
 
           <ul class="etabs">
-            <li class="tab"><a href="#tab-1">강좌소개</a></li>
-            <li class="tab"><a href="#tab-2">강좌목록</a></li>
-            <li class="tab"><a href="#tab-3">교재설명</a></li>
-            <li class="tab"><a href="#tab-4">수강후기</a></li>
+            <li class="tab"><a href="#tab-1">상세설명</a></li>
+            <li class="tab"><a href="#tab-2">후기</a></li>
           </ul>
 
           <div class="panel-container t-mgr10" style="border:1px solid #e5e5e5; padding:10px 20px; border-radius:2px;" >
@@ -78,33 +76,8 @@
               ${pvo.content}
             </div>
 
+
             <div class="tab-block" id="tab-2">
-              <div class="container" >
-
-
-                    <table class="standard-table col-sm-7">
-                      <tr><th>번호</th><th>제목</th><th>시간</th></tr>
-
-                      <c:forEach var="list" items="${clist}" varStatus="status">
-                        <tr>
-                          <td>${status.index + 1}</td>
-                          <td>${list.chaptitle}</td>
-                          <td>${list.runtime}</td>
-                        </tr>
-                      </c:forEach>
-                    </table>
-
-              </div>
-            </div>
-
-            <div class="tab-block" id="tab-3">
-              <div class="container">
-                <section class="comments-sec">
-                  ${pvo.lec_book}
-                </section>
-              </div>
-            </div>
-            <div class="tab-block" id="tab-4">
               <div class="container">
 
 
@@ -229,7 +202,7 @@
             type : "POST",
             url : "/cart",
             dataType : "json",
-            data : {'prdcode' : $prdcode},
+            data : {'prdCode' : $prdcode, 'prdtype' : 'P'},
             error : function(request,status, error) {
               console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },

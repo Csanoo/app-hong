@@ -24,6 +24,12 @@ public class ProductSvc implements ProductMapper {
 		return sqlSession.selectOne("selLectureDetail", leccode);
 	}
 
+	/* 상품 상세 */
+	public ProductVO selectprdDetail(String prdcode) {
+		return sqlSession.selectOne("selPrdetail", prdcode);
+	}
+
+
 	public List<ChapterVO> selChapterList(String leccode){
 		return sqlSession.selectList("selChapterList", leccode);
 	}
@@ -65,8 +71,9 @@ public class ProductSvc implements ProductMapper {
 
 
 	public int cartInsert(ProductVO cartvo) {
-		String type = cartvo.getPrdtype();
-		if(type.equals("L")){
+		String prdtype = cartvo.getPrdtype();
+		System.out.println("prdtype="+prdtype);
+		if("L".equals(prdtype)){
 			sqlSession.insert("insertCartL",cartvo);
 		}else{
 			sqlSession.insert("insertCart",cartvo);

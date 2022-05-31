@@ -76,7 +76,9 @@
 		From wiz_lecture wp left join wiz_clprelation wc  on wp.leccode = wc.leccode
 		where wp.leccode=#{leccode}
 	</select>
-
+	<select id="selPrdetail" parameterType="String" resultType="main.java.app.hgm.product.ProductVO">
+		select *, new as newc from wiz_product wp, wiz_cprelation wc where wp.prdcode=#{prdcode} and wc.prdcode = wp.prdcode
+	</select>
 	<select id="selChapterList" parameterType="String" resultType="main.java.app.hgm.chapter.ChapterVO">
 		SELECT
 		ch.idx sn,
@@ -143,22 +145,28 @@
 
 
 	<insert id="insertCart" parameterType="main.java.app.hgm.product.ProductVO" >
-		insert into wiz_basket_tmp (uniq_id, prdcode, prdname, prdimg, prdprice, prdreserve, amount, wdate)
-		select #{uniq_id}, prdcode, prdname, prdimg_R, sellprice, reserve, '1', now()  from wiz_product where prdcode= #{prdcode};
+		insert into wiz_basket_tmp (uniq_id, prdcode, prdname, prdimg, prdprice, prdreserve, amount, wdate, gubun)
+		select #{uniq_id}, prdcode, prdname, prdimg_R, sellprice, reserve, '1', now(), 'P'  from wiz_product where prdcode= #{prdcode};
 	</insert>
 
 	<insert id="insertCartL" parameterType="main.java.app.hgm.product.ProductVO" >
-		insert into wiz_basket_tmp (uniq_id, prdcode, prdname, prdimg, prdprice, prdreserve, amount, wdate)
-		SELECT  #{uniq_id},leccode, lecname, lecimg_R, sellprice, reserve, '1', now() FROM wiz_lecture where leccode= #{prdcode};
+		insert into wiz_basket_tmp (uniq_id, prdcode, prdname, prdimg, prdprice, prdreserve, amount, wdate, gubun)
+		SELECT  #{uniq_id},leccode, lecname, lecimg_R, sellprice, reserve, '1', now(), 'L' FROM wiz_lecture where leccode= #{prdcode};
 	</insert>
 
 	<insert id="insertCheckout" parameterType="main.java.app.hgm.product.ProductVO" >
-		insert into wiz_basket (uniq_id, prdcode, prdname, prdimg, prdprice, prdreserve, amount, wdate)
-		SELECT  #{uniq_id},leccode, lecname, lecimg_R, sellprice, reserve, amount, now() FROM wiz_basket_temp where uniq_id= #{uniq_id};
+		insert into wiz_basket (orderid, prdcode, prdname, prdimg, prdprice, prdreserve, amount, wdate, prdtype, deltype, del_price)
+		SELECT  #{orderid},prdcode, prdname, prdimg, prdprice, prdreserve, amount, now(),(CASE gubun WHEN 'L' THEN 'LEC' ELSE 'PRD' END) AS 'prdtype'  FROM wiz_basket_tmp where uniq_id= #{uniq_id};
 	</insert>
+
+
+	<select id="selOrderList"
+			parameterType="main.java.app.hgm.product.ProductVO" resultType="main.java.app.hgm.product.ProductVO">
+		select * from wiz_basket where orderid=#{orderid}
+	</select>
+
+
 </mapper>
-
-
 
 
 

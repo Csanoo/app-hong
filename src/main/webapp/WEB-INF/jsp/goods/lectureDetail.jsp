@@ -229,7 +229,7 @@
             type : "POST",
             url : "/cart",
             dataType : "json",
-            data : {'prdcode' : $prdcode},
+            data : {'prdCode' : $prdcode, 'prdtype' : 'L'},
             error : function(request,status, error) {
               console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             },
